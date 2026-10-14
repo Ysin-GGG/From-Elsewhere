@@ -1,0 +1,181 @@
+using LOI.DataStructures;
+using LOI.Interface;
+using LOI.Utility;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LOI.Gameplay
+{
+    /// <summary> 符节（多联骨牌） </summary>
+    public class Polyomino : Item, IModifierItem<Dungeon>
+    {
+        public const int Size = 4;
+        private static int[] d = { 0, 1, 0, -1, 0 };
+        private static HashSet<ushort> Valid = new HashSet<ushort>()
+        {
+            0x000F, 0x0017, 0x001F, 0x0027, 0x002F, 0x0033, 0x0036, 0x0037, 0x003E, 0x003F, 0x0047, 0x004F,
+            0x0057, 0x005F, 0x0063, 0x0067, 0x006F, 0x0077, 0x007D, 0x007E, 0x007F, 0x008F, 0x009F, 0x00AF,
+            0x00BF, 0x00C7, 0x00CF, 0x00D7, 0x00DF, 0x00E7, 0x00EF, 0x00FF, 0x0117, 0x011F, 0x0136, 0x0137,
+            0x013E, 0x013F, 0x0157, 0x015F, 0x0171, 0x0172, 0x0173, 0x0174, 0x0175, 0x0176, 0x0177, 0x017C,
+            0x017D, 0x017E, 0x017F, 0x019F, 0x01BE, 0x01BF, 0x01D7, 0x01DF, 0x01F1, 0x01F2, 0x01F3, 0x01F4,
+            0x01F5, 0x01F6, 0x01F7, 0x01F8, 0x01F9, 0x01FA, 0x01FB, 0x01FC, 0x01FD, 0x01FE, 0x022F, 0x0236,
+            0x0237, 0x023E, 0x023F, 0x026F, 0x0272, 0x0273, 0x0275, 0x0277, 0x027C, 0x027D, 0x027E, 0x027F,
+            0x02AF, 0x02BE, 0x02BF, 0x02E3, 0x02E7, 0x02EB, 0x02EF, 0x02F1, 0x02F2, 0x02F3, 0x02F4, 0x02F5,
+            0x02F6, 0x02F7, 0x02F9, 0x02FA, 0x02FB, 0x02FC, 0x02FD, 0x02FE, 0x0317, 0x031F, 0x0326, 0x0327,
+            0x032E, 0x032F, 0x0336, 0x0337, 0x033E, 0x033F, 0x0357, 0x035F, 0x0367, 0x036C, 0x036E, 0x036F,
+            0x0375, 0x0376, 0x0377, 0x037C, 0x037D, 0x037E, 0x039F, 0x03AE, 0x03AF, 0x03BE, 0x03D7, 0x03E2,
+            0x03E3, 0x03E6, 0x03E7, 0x03EA, 0x03EB, 0x03EE, 0x03F1, 0x03F2, 0x03F3, 0x03F5, 0x03F6, 0x03F9,
+            0x03FA, 0x03FC, 0x044F, 0x045F, 0x046F, 0x047D, 0x047E, 0x047F, 0x04C7, 0x04CF, 0x04D7, 0x04DF,
+            0x04E3, 0x04E7, 0x04EB, 0x04EF, 0x04F1, 0x04F2, 0x04F3, 0x04F5, 0x04F6, 0x04F7, 0x04F9, 0x04FA,
+            0x04FB, 0x04FD, 0x04FE, 0x0557, 0x055F, 0x0575, 0x0577, 0x057D, 0x057E, 0x05D7, 0x05F1, 0x05F3,
+            0x05F5, 0x05F6, 0x05F9, 0x05FA, 0x062F, 0x063E, 0x063F, 0x064F, 0x065F, 0x066F, 0x067D, 0x067E,
+            0x06AF, 0x06BE, 0x06C7, 0x06CF, 0x06D7, 0x06E3, 0x06E7, 0x06EB, 0x06F1, 0x06F3, 0x06F5, 0x06F6,
+            0x06F9, 0x071F, 0x072E, 0x072F, 0x073E, 0x074F, 0x0757, 0x075D, 0x075E, 0x076E, 0x07C7, 0x07D1,
+            0x07D3, 0x07D5, 0x07D9, 0x07E3, 0x07F1, 0x088F, 0x089F, 0x08AF, 0x08BF, 0x08C7, 0x08CF, 0x08D7,
+            0x08DF, 0x08E3, 0x08E7, 0x08EB, 0x08EF, 0x08F1, 0x08F3, 0x08F5, 0x08F7, 0x08F9, 0x08FB, 0x08FD,
+            0x099F, 0x09D7, 0x09F3, 0x09F5, 0x09F9, 0x0AAF, 0x0AE3, 0x0AE7, 0x0AEB, 0x0AF3, 0x0AF5, 0x0BE3,
+            0x0C47, 0x0C4F, 0x0C57, 0x0C5F, 0x0C63, 0x0C67, 0x0C6F, 0x0C73, 0x0C77, 0x0C8F, 0x0C9F, 0x0CAF,
+            0x0CC7, 0x0CCF, 0x0CD7, 0x0CE7, 0x0CEB, 0x0CF3, 0x0D57, 0x0E27, 0x0E2F, 0x0E37, 0x0E4F, 0x0E57,
+            0x0E67, 0x0E8F, 0x111F, 0x113E, 0x113F, 0x115F, 0x117C, 0x117D, 0x117E, 0x119F, 0x11BE, 0x11D7,
+            0x11F1, 0x11F2, 0x11F3, 0x11F4, 0x11F5, 0x11F6, 0x11F8, 0x11F9, 0x11FA, 0x11FC, 0x131F, 0x132E,
+            0x132F, 0x133E, 0x136C, 0x136E, 0x137C, 0x13AE, 0x13E2, 0x13E3, 0x13E4, 0x13E6, 0x13E8, 0x13EA,
+            0x13EC, 0x13F1, 0x13F2, 0x13F4, 0x13F8, 0x157C, 0x15F1, 0x15F2, 0x15F4, 0x15F8, 0x172E, 0x174C,
+            0x174E, 0x175C, 0x176C, 0x17C4, 0x17C6, 0x17CC, 0x17D1, 0x17D4, 0x17D8, 0x17E2, 0x17E4, 0x17E8,
+            0x19F1, 0x19F2, 0x19F4, 0x19F8, 0x1BE2, 0x1BE4, 0x1D71, 0x1D72, 0x1D74, 0x1F11, 0x1F13, 0x1F22,
+            0x1F23, 0x1F26, 0x1F31, 0x1F32, 0x1F44, 0x1F46, 0x1F4C, 0x1F51, 0x1F54, 0x1F62, 0x1F64, 0x1F8C,
+            0x1F91, 0x1FA2, 0x1FC4, 0x223E, 0x223F, 0x227C, 0x227D, 0x227E, 0x22BE, 0x22F1, 0x22F2, 0x22F3,
+            0x22F4, 0x22F5, 0x22F6, 0x22F9, 0x22FA, 0x22FC, 0x231F, 0x232E, 0x232F, 0x233E, 0x236C, 0x236E,
+            0x237C, 0x23AE, 0x23E2, 0x23E3, 0x23E4, 0x23E6, 0x23EA, 0x23EC, 0x23F1, 0x23F2, 0x23F4, 0x263E,
+            0x267C, 0x26F1, 0x26F2, 0x26F4, 0x272E, 0x274C, 0x274E, 0x275C, 0x276C, 0x27C6, 0x27CC, 0x27D1,
+            0x27D4, 0x27E2, 0x27E4, 0x2AF1, 0x2AF2, 0x2AF4, 0x2BE2, 0x2E74, 0x2EB1, 0x2EB2, 0x2F4C, 0x2F8C,
+            0x2F91, 0x2FA2, 0x311F, 0x313E, 0x317C, 0x31F1, 0x31F2, 0x322E, 0x322F, 0x323E, 0x326C, 0x326E,
+            0x327C, 0x32AE, 0x32E2, 0x32E3, 0x32E6, 0x32EA, 0x32EC, 0x32F1, 0x32F2, 0x332E, 0x336C, 0x33E2,
+            0x362E, 0x364E, 0x366C, 0x36C6, 0x36E2, 0x3AE2, 0x3EA2, 0x45F1, 0x45F2, 0x472E, 0x47E2, 0x4F91,
+            0x722E,
+        };
+
+        private Bit16 shape;
+
+        public bool[,] Shape
+        { 
+            get 
+            {
+                for (int i = 0; i < Polyomino.Size; i++)
+                    for (int j = 0; j < Polyomino.Size; j++)
+                        field[i, j] = this.shape[i * Polyomino.Size + j];
+                return field;
+            }
+        } = new bool[Polyomino.Size, Polyomino.Size];
+
+        public List<Modifier<Dungeon>> Modifiers { get; } = new List<Modifier<Dungeon>>();
+
+        public Polyomino(Bit16 shape) : base(1, 1)
+        {
+            try
+            {
+                this.shape = shape;
+                if (!this.IsValid()) throw new ArgumentException("Invalid shape.");
+            }
+            catch { this.RandGen(); }
+        }
+
+        /// <summary>
+        /// 生成舆图
+        /// </summary>
+        /// <param name="shape">4x4的布尔矩阵，不可设为<see langword="null"/></param>
+        /// <exception cref="ArgumentNullException">shape不能为null</exception>
+        /// <exception cref="ArgumentException">shape的维度必须是4x4</exception>
+        public Polyomino(bool[,] shape) : base(1, 1)
+        {
+            try
+            {
+                if (shape == null) throw new ArgumentNullException();
+                int w = shape.GetLength(1);
+                int h = shape.GetLength(0);
+                if (w != Polyomino.Size || h != Polyomino.Size) throw new ArgumentException("Shape must be a 4x4 bitmap.");
+                this.shape = new Bit16(
+                    shape[0, 0], shape[0, 1], shape[0, 2], shape[0, 3],
+                    shape[1, 0], shape[1, 1], shape[1, 2], shape[1, 3],
+                    shape[2, 0], shape[2, 1], shape[2, 2], shape[2, 3],
+                    shape[3, 0], shape[3, 1], shape[3, 2], shape[3, 3]);
+                if (!this.IsValid()) throw new ArgumentException("Invalid shape.");
+            }
+            catch { this.RandGen(); }
+        }
+
+        private void RandGen()
+        {
+            this.shape = Rand.NextObject(null, Polyomino.Valid.ToArray());
+            this.Rotate(Rand.NextInt(0, 4));
+            if (Rand.NextBool()) this.FlipHorizontal();
+            if (Rand.NextBool()) this.FlipVertical();
+        }
+
+        public void Rotate(int n) => this.Transform(n.Mod(4));
+
+        public void FlipHorizontal() => this.Transform(4);
+
+        public void FlipVertical() => this.Transform(5);
+
+        private bool IsValid()
+        {
+            if (this.shape.Count(true).InRange(4, 8, true, true))
+                for (int i = 0; i < 16; i++)
+                    if (this.shape[i])
+                    {
+                        bool[] vst = new bool[16];
+                        Queue<int> q = new();
+                        q.Enqueue(i);
+                        vst[i] = true;
+                        for (i = 0; q.Count > 0; i++)
+                        {
+                            int p = q.Dequeue();
+                            int x = p % Polyomino.Size;
+                            int y = p / Polyomino.Size;
+                            for (int j = 0; j < 4;)
+                            {
+                                int nx = x + d[j++];
+                                int ny = y + d[j];
+                                if (nx.InRange(0, Polyomino.Size, true, false) && ny.InRange(0, Polyomino.Size, true, false))
+                                {
+                                    int np = ny * Polyomino.Size + nx;
+                                    if (!vst[np] && this.shape[np])
+                                    {
+                                        vst[np] = true;
+                                        q.Enqueue(np);
+                                    }
+                                }
+                            }
+                        }
+                        return this.shape.Count(true, i);
+                    }
+            return false;
+        }
+
+        private void Transform(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    this.shape.Transform(0x37BF26AE159D048C);
+                    break;
+                case 2:
+                    this.shape.Transform(0x0123456789ABCDEF);
+                    break;
+                case 3:
+                    this.shape.Transform(0xC840D951EA62FB73);
+                    break;
+                case 4:
+                    this.shape.Transform(0xCDEF89AB45670123);
+                    break;
+                case 5:
+                    this.shape.Transform(0x32107654BA98FEDC);
+                    break;
+            }
+        }
+
+        IList IModifierItem.Modifiers => Modifiers;
+    }
+}

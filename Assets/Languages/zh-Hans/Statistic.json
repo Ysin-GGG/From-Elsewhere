@@ -1,0 +1,74 @@
+{
+  "Style": {
+	"FinalsOnly": "{0}",
+	"BasicsOnly": "{0}",
+	"FinalsPlusExtra": "{0}（+{1}）",
+	"BasicsPlusExtra": "{0}（+{1}）"
+  },
+  "Prefab": {
+	"Power": "【强度】",
+	"Resistance": "【抗性】",
+	"Critical": "会心",
+	"Direct": "直接伤害",
+	"Indirect": "间接伤害",
+	"Normal": "普通伤害",
+	"Special": "特殊伤害",
+	"Primary": "基础伤害",
+	"Elemental": "元素伤害",
+	"Slash": "斩击",
+	"Blunt": "钝击",
+	"Pierce": "刺击",
+	"Spell": "法术",
+	"Thermo": "火元素",
+	"Hydro": "水元素",
+	"Cyro": "冰元素",
+	"Bronto": "雷元素",
+	"Aero": "风元素",
+	"Petro": "岩元素"
+  },
+  "Vanilla": {
+	"MaxLife": "最大体力值",
+	"MaxMana": "最大气力值",
+	"MaxStamina": "最大耐力值",
+	"Attack": "攻击力",
+	"Defense": "防御力",
+	"MovementSpeed": "移动速度",
+	"JumpStrength": "跳跃力度",
+	"Critical": {
+	  "Chance": "{$Statistic.Prefab.Critical}几率",
+	  "Damage": "{$Statistic.Prefab.Critical}倍率"
+	},
+	"Power": {
+	  "Direct": "{$Statistic.Prefab.Direct}{$Statistic.Prefab.Power}",
+	  "Indirect": "{$Statistic.Prefab.Indirect}{$Statistic.Prefab.Power}",
+	  "Primary": "{$Statistic.Prefab.Primary}{$Statistic.Prefab.Power}",
+	  "Elemental": "{$Statistic.Prefab.Elemental}{$Statistic.Prefab.Power}",
+	  "Slash": "{$Statistic.Prefab.Slash}{$Statistic.Prefab.Power}",
+	  "Blunt": "{$Statistic.Prefab.Blunt}{$Statistic.Prefab.Power}",
+	  "Pierce": "{$Statistic.Prefab.Pierce}{$Statistic.Prefab.Power}",
+	  "Spell": "{$Statistic.Prefab.Spell}{$Statistic.Prefab.Power}",
+	  "Thermo": "{$Statistic.Prefab.Thermo}{$Statistic.Prefab.Power}",
+	  "Hydro": "{$Statistic.Prefab.Hydro}{$Statistic.Prefab.Power}",
+	  "Cyro": "{$Statistic.Prefab.Cyro}{$Statistic.Prefab.Power}",
+	  "Bronto": "{$Statistic.Prefab.Bronto}{$Statistic.Prefab.Power}",
+	  "Aero": "{$Statistic.Prefab.Aero}{$Statistic.Prefab.Power}",
+	  "Petro": "{$Statistic.Prefab.Petro}{$Statistic.Prefab.Power}"
+	},
+	"Resistance": {
+	  "Direct": "{$Statistic.Prefab.Direct}{$Statistic.Prefab.Resistance}",
+	  "Indirect": "{$Statistic.Prefab.Indirect}{$Statistic.Prefab.Resistance}",
+	  "Primary": "{$Statistic.Prefab.Primary}{$Statistic.Prefab.Resistance}",
+	  "Elemental": "{$Statistic.Prefab.Elemental}{$Statistic.Prefab.Resistance}",
+	  "Slash": "{$Statistic.Prefab.Slash}{$Statistic.Prefab.Resistance}",
+	  "Blunt": "{$Statistic.Prefab.Blunt}{$Statistic.Prefab.Resistance}",
+	  "Pierce": "{$Statistic.Prefab.Pierce}{$Statistic.Prefab.Resistance}",
+	  "Spell": "{$Statistic.Prefab.Spell}{$Statistic.Prefab.Resistance}",
+	  "Thermo": "{$Statistic.Prefab.Thermo}{$Statistic.Prefab.Resistance}",
+	  "Hydro": "{$Statistic.Prefab.Hydro}{$Statistic.Prefab.Resistance}",
+	  "Cyro": "{$Statistic.Prefab.Cyro}{$Statistic.Prefab.Resistance}",
+	  "Bronto": "{$Statistic.Prefab.Bronto}{$Statistic.Prefab.Resistance}",
+	  "Aero": "{$Statistic.Prefab.Aero}{$Statistic.Prefab.Resistance}",
+	  "Petro": "{$Statistic.Prefab.Petro}{$Statistic.Prefab.Resistance}"
+	}
+  }
+}

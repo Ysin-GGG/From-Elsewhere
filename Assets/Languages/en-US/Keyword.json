@@ -1,0 +1,162 @@
+{
+  "Critical": {
+    "Meta": "[url=Keyword.Critical]{$Keyword.Critical.Name}[/url]",
+    "Name": "Critical",
+    "Description": "Critical effects modify individual instances of damage by a percentage (usually positive). Whether a critical effect has occurred can be observed through changes in the damage text style.\n\nBy default, critical effects can only be triggered by dealing {$Keyword.Direct.Meta} damage."
+  },
+  "Normal": {
+    "Meta": "[url=Keyword.Normal]{$Keyword.Normal.Name}[/url]",
+    "Name": "Normal",
+    "Description": "Normal attacks generally refer to attacks that do not consume the stamina bar;\nIncludes attacks executed with the attack button, as well as attacks that only consume stamina;\nFor non-player units, any attack that does not trigger a pause in action is considered a normal attack.\n\nThe Normal and Special tags are mutually exclusive."
+  },
+  "Special": {
+    "Meta": "[url=Keyword.Special]{$Keyword.Special.Name}[/url]",
+    "Name": "Special",
+    "Description": "Special attacks generally refer to attacks that consume the stamina bar;\nIncludes attacks executed with the skill button, or attacks that consume stamina;\nFor non-player units, any attack that triggers a pause in action is considered a special attack.\n\nUnless specified otherwise, all attacks from summoned units derived from skills are considered special attacks.\n\nThe Normal and Special tags are mutually exclusive."
+  },
+  "Direct": {
+    "Meta": "[url=Keyword.Direct]{$Keyword.Direct.Name}[/url]",
+    "Name": "Direct",
+    "Description": "Direct attacks are typically caused by entities or weapon attacks;\nDirect attacks can cause hit-stun and can be avoided through evasion effects.\n\nAll attacks that are not indirect are direct attacks."
+  },
+  "Indirect": {
+    "Meta": "[url=Keyword.Indirect]{$Keyword.Indirect.Name}[/url]",
+    "Name": "Indirect",
+    "Description": "Indirect attacks are typically caused by environmental or debuff effects;\nIndirect attacks do not cause hit-stun but cannot be avoided through evasion.\n\nAll attacks that are not direct are indirect attacks."
+  },
+  "Physical": {
+    "Meta": "[url=Keyword.Physical]{$Keyword.Physical.Name}[/url]",
+    "Name": "Physical",
+    "Description": ""
+  },
+  "Elemental": {
+    "Meta": "[url=Keyword.Elemental]{$Keyword.Elemental.Name}[/url]",
+    "Name": "Elemental",
+    "Description": ""
+  },
+  "Slash": {
+    "Meta": "[url=Keyword.Slash]{$Keyword.Slash.Name}[/url]",
+    "Name": "Slash",
+    "Description": ""
+  },
+  "Blunt": {
+    "Meta": "[url=Keyword.Blunt]{$Keyword.Blunt.Name}[/url]",
+    "Name": "Blunt",
+    "Description": ""
+  },
+  "Pierce": {
+    "Meta": "[url=Keyword.Pierce]{$Keyword.Pierce.Name}[/url]",
+    "Name": "Pierce",
+    "Description": ""
+  },
+  "Thermo": {
+    "Meta": "[url=Keyword.Thermo]{$Keyword.Thermo.Name}[/url]",
+    "Name": "Fire Element",
+    "Description": ""
+  },
+  "Hydro": {
+    "Meta": "[url=Keyword.Hydro]{$Keyword.Hydro.Name}[/url]",
+    "Name": "Water Element",
+    "Description": ""
+  },
+  "Cyro": {
+    "Meta": "[url=Keyword.Cyro]{$Keyword.Cyro.Name}[/url]",
+    "Name": "Ice Element",
+    "Description": ""
+  },
+  "Bronto": {
+    "Meta": "[url=Keyword.Bronto]{$Keyword.Bronto.Name}[/url]",
+    "Name": "Thunder Element",
+    "Description": ""
+  },
+  "Aero": {
+    "Meta": "[url=Keyword.Aero]{$Keyword.Aero.Name}[/url]",
+    "Name": "Wind Element",
+    "Description": ""
+  },
+  "Petro": {
+    "Meta": "[url=Keyword.Petro]{$Keyword.Petro.Name}[/url]",
+    "Name": "Earth Element",
+    "Description": ""
+  },
+  "Threat": {
+    "Meta": "[url=Keyword.Threat]{$Keyword.Threat.Name}[/url]",
+    "Name": "Ailment",
+    "Description": "Ailments are special effects caused by dealing damage, divided into {$Keyword.PhysicalThreat.Meta} and {$Keyword.ElementalThreat.Meta};\nAll ailments are neither buffs nor debuffs.\n\nFor boss-type enemies, the damage and variable effects caused by ailments are halved."
+  },
+  "PhysicalThreat": {
+    "Meta": "[url=Keyword.PhysicalThreat]{$Keyword.PhysicalThreat.Name}[/url]",
+    "Name": "Physical Ailment",
+    "Description": ""
+  },
+  "PhysicalThreatLevel": {
+    "Meta": "[url=Keyword.PhysicalThreatLevel]{$Keyword.PhysicalThreatLevel.Name}[/url]",
+    "Name": "Physical Ailment Value",
+    "Description": ""
+  },
+  "PhysicalThreatEffect": {
+    "Meta": "[url=Keyword.PhysicalThreatEffect]{$Keyword.PhysicalThreatEffect.Name}[/url]",
+    "Name": "Physical Ailment Effect",
+    "Description": ""
+  },
+  "PhysicalThreatStatus": {
+    "Meta": "[url=Keyword.PhysicalThreatStatus]{$Keyword.PhysicalThreatStatus.Name}[/url]",
+    "Name": "Physical Ailment State",
+    "Description": ""
+  },
+  "ElementalThreat": {
+    "Meta": "[url=Keyword.ElementalThreat]{$Keyword.ElementalThreat.Name}[/url]",
+    "Name": "Elemental Ailment",
+    "Description": "Elemental ailments are divided into {$Keyword.ElementalThreatEffect.Meta} and {$Keyword.ElementalThreatStatus.Meta}.\n\nDealing direct elemental damage accumulates corresponding elemental ailment values, thereby triggering the corresponding elemental ailment effect;\nThe calculation of each elemental ailment value is independent."
+  },
+  "ElementalThreatLevel": {
+    "Meta": "[url=Keyword.ElementalThreatLevel]{$Keyword.ElementalThreatLevel.Name}[/url]",
+    "Name": "Elemental Ailment Value",
+    "Description": "When receiving {$Keyword.Direct.Meta}{$Keyword.Elemental.Meta} damage, there is a chance to trigger accumulation of the corresponding elemental ailment value.\n\nAll elemental ailment accumulations have independent built-in interval timers. When elemental ailment accumulation is triggered, the timer for that element resets to 0 seconds;\nThe initial trigger chance for all elemental ailment accumulations is 0%. For every 0.05 seconds on the interval timer, the trigger chance increases by 5%.\n\nWhen triggering elemental ailment accumulation via direct elemental damage, a random value between 2 and 4 of the corresponding elemental ailment value is accumulated. If {$Keyword.Critical.Meta} is triggered, an additional 1 point is accumulated;\nIf, when this accumulation is triggered, the direct elemental damage received does not exceed 1% of the target's maximum HP, the accumulated elemental ailment value is halved;\nThe initial maximum for all elemental ailment values is 100 points, and the minimum is always 0."
+  },
+  "ElementalThreatEffect": {
+    "Meta": "[url=Keyword.ElementalThreatEffect]{$Keyword.ElementalThreatEffect.Name}[/url]",
+    "Name": "Elemental Ailment Effect",
+    "Description": "As soon as elemental ailment value is accumulated, the corresponding elemental ailment effect takes effect immediately;\nSome elemental ailment effects are overridden by their corresponding elemental ailment state.\n\nThe degree of elemental ailment effect varies according to the magnitude of the corresponding elemental ailment value."
+  },
+  "ElementalThreatStatus": {
+    "Meta": "[url=Keyword.ElementalThreatStatus]{$Keyword.ElementalThreatStatus.Name}[/url]",
+    "Name": "Elemental Ailment State",
+    "Description": "When the accumulation of elemental ailment values reaches a certain level, the corresponding elemental ailment state will be triggered when conditions are met.\n\n."
+  },
+  "IntroductionArt": {
+    "Meta": "[url=Keyword.IntroductionArt]{$Keyword.IntroductionArt.Name}[/url]",
+    "Name": "Introductory Art",
+    "Description": "Applies only to {$Keyword.Normal.Meta} attacks.\n\nIntroductory arts can be used directly from a neutral state."
+  },
+  "CombinationArt": {
+    "Meta": "[url=Keyword.CombinationArt]{$Keyword.CombinationArt.Name}[/url]",
+    "Name": "Combination Art",
+    "Description": "Applies only to {$Keyword.Normal.Meta} attacks.\n\nCombination arts can be chained from {$Keyword.Normal.Meta} attacks."
+  },
+  "ExtinctionArt": {
+    "Meta": "[url=Keyword.ExtinctionArt]{$Keyword.ExtinctionArt.Name}[/url]",
+    "Name": "Finishing Art",
+    "Description": "Applies only to {$Keyword.Normal.Meta} attacks.\n\nFinishing arts cannot chain into any further {$Keyword.Normal.Meta} attacks."
+  },
+  "SuperCancel": {
+    "Meta": "[url=Keyword.SuperCancel]{$Keyword.SuperCancel.Name}[/url]",
+    "Name": "Super Cancel",
+    "Description": "Linking a skill after a {$Keyword.ExtinctionArt.Meta} triggers a Super Cancel.\n\nTo trigger a Super Cancel, an additional 1 unit of Refined Qi is consumed;\nSkills derived from a Super Cancel deal 15% increased damage."
+  },
+  "DreamCancel": {
+    "Meta": "[url=Keyword.DreamCancel]{$Keyword.DreamCancel.Name}[/url]",
+    "Name": "Dream Cancel",
+    "Description": "Linking a skill after another skill triggers a Dream Cancel.\n\nTo trigger a Dream Cancel, an additional 1 unit of Refined Qi is consumed;\nSkills derived from a Dream Cancel deal 35% increased damage."
+  },
+  "Regeneration": {
+    "Meta": "[url=Keyword.Regeneration]{$Keyword.Regeneration.Name}[/url]",
+    "Name": "Regeneration",
+    "Description": "Continuously restores health intermittently, initial interval is 1 second."
+  },
+  "Unknown": {
+    "Meta": "[s]{$Keyword.Unknown.Name}[/s]",
+    "Name": "Unknown Keyword Name",
+    "Description": "[s]Unknown keyword description[/s]"
+  }
+}

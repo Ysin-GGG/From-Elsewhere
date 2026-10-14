@@ -1,0 +1,162 @@
+{
+  "Critical": {
+    "Meta": "[url=Keyword.Critical]{$Keyword.Critical.Name}[/url]",
+    "Name": "会心",
+    "Description": "会心效果会以百分比的形式对单次伤害进行修正（通常是正收益），可通过伤害文字的样式变化来观察是否有造成会心效果。\n\n默认情况下，只能通过造成{$Keyword.Direct.Meta}伤害来触发会心效果。"
+  },
+  "Normal": {
+    "Meta": "[url=Keyword.Normal]{$Keyword.Normal.Name}[/url]",
+    "Name": "普通",
+    "Description": "普通攻击通常是指不消耗气力槽的攻击；\n包括通过攻击键释放的攻击，以及仅消耗气力的攻击；\n对于非玩家单位而言，不会执行演出暂停的攻击均为普通攻击。\n\n普通攻击和特殊攻击的标签不会同时存在。"
+  },
+  "Special": {
+    "Meta": "[url=Keyword.Special]{$Keyword.Special.Name}[/url]",
+    "Name": "特殊",
+    "Description": "特殊攻击通常是指会消耗气力槽的攻击；\n包括通过技能键释放的攻击，或是消耗气力槽的攻击；\n对于非玩家单位而言，会执行演出暂停的攻击均为特殊攻击。\n\n若非特殊说明，对于技能衍生出的召唤单位，其所有攻击均视为特殊攻击。\n\n普通攻击和特殊攻击的标签不会同时存在。"
+  },
+  "Direct": {
+    "Meta": "[url=Keyword.Direct]{$Keyword.Direct.Name}[/url]",
+    "Name": "直接",
+    "Description": "直接攻击通常由实体或武器攻击引发；\n直接攻击能够造成硬直，且可以通过闪避效果规避伤害。\n\n所有非间接攻击的类型均为直接攻击。"
+  },
+  "Indirect": {
+    "Meta": "[url=Keyword.Indirect]{$Keyword.Indirect.Name}[/url]",
+    "Name": "间接",
+    "Description": "间接攻击通常由环境或减益效果引发；\n间接攻击不会造成硬直，但无法通过闪避效果规避伤害。\n\n所有非直接攻击的类型均为间接攻击。"
+  },
+  "Physical": {
+    "Meta": "[url=Keyword.Physical]{$Keyword.Physical.Name}[/url]",
+    "Name": "物理",
+    "Description": ""
+  },
+  "Elemental": {
+    "Meta": "[url=Keyword.Elemental]{$Keyword.Elemental.Name}[/url]",
+    "Name": "元素",
+    "Description": ""
+  },
+  "Slash": {
+    "Meta": "[url=Keyword.Slash]{$Keyword.Slash.Name}[/url]",
+    "Name": "斩击",
+    "Description": ""
+  },
+  "Blunt": {
+    "Meta": "[url=Keyword.Blunt]{$Keyword.Blunt.Name}[/url]",
+    "Name": "钝击",
+    "Description": ""
+  },
+  "Pierce": {
+    "Meta": "[url=Keyword.Pierce]{$Keyword.Pierce.Name}[/url]",
+    "Name": "刺击",
+    "Description": ""
+  },
+  "Thermo": {
+    "Meta": "[url=Keyword.Thermo]{$Keyword.Thermo.Name}[/url]",
+    "Name": "火元素",
+    "Description": ""
+  },
+  "Hydro": {
+    "Meta": "[url=Keyword.Hydro]{$Keyword.Hydro.Name}[/url]",
+    "Name": "水元素",
+    "Description": ""
+  },
+  "Cyro": {
+    "Meta": "[url=Keyword.Cyro]{$Keyword.Cyro.Name}[/url]",
+    "Name": "冰元素",
+    "Description": ""
+  },
+  "Bronto": {
+    "Meta": "[url=Keyword.Bronto]{$Keyword.Bronto.Name}[/url]",
+    "Name": "雷元素",
+    "Description": ""
+  },
+  "Aero": {
+    "Meta": "[url=Keyword.Aero]{$Keyword.Aero.Name}[/url]",
+    "Name": "风元素",
+    "Description": ""
+  },
+  "Petro": {
+    "Meta": "[url=Keyword.Petro]{$Keyword.Petro.Name}[/url]",
+    "Name": "岩元素",
+    "Description": ""
+  },
+  "Threat": {
+    "Meta": "[url=Keyword.Threat]{$Keyword.Threat.Name}[/url]",
+    "Name": "异常",
+    "Description": "异常是造成伤害引起的一种特殊影响，分为{$Keyword.PhysicalThreat.Meta}和{$Keyword.ElementalThreat.Meta}两种；\n所有异常既不属于增益也不属于减益。\n\n对于头目类敌人，异常对其造成的伤害及可变动的影响会减半"
+  },
+  "PhysicalThreat": {
+    "Meta": "[url=Keyword.PhysicalThreat]{$Keyword.PhysicalThreat.Name}[/url]",
+    "Name": "物理异常",
+    "Description": ""
+  },
+  "PhysicalThreatLevel": {
+    "Meta": "[url=Keyword.PhysicalThreatLevel]{$Keyword.PhysicalThreatLevel.Name}[/url]",
+    "Name": "物理异常值",
+    "Description": ""
+  },
+  "PhysicalThreatEffect": {
+    "Meta": "[url=Keyword.PhysicalThreatEffect]{$Keyword.PhysicalThreatEffect.Name}[/url]",
+    "Name": "物理异常效果",
+    "Description": ""
+  },
+  "PhysicalThreatStatus": {
+    "Meta": "[url=Keyword.PhysicalThreatStatus]{$Keyword.PhysicalThreatStatus.Name}[/url]",
+    "Name": "物理异常状态",
+    "Description": ""
+  },
+  "ElementalThreat": {
+    "Meta": "[url=Keyword.ElementalThreat]{$Keyword.ElementalThreat.Name}[/url]",
+    "Name": "元素异常",
+    "Description": "元素异常分为{$Keyword.ElementalThreatEffect.Meta}和{$Keyword.ElementalThreatStatus.Meta}两种。\n\n通过直接元素伤害造成对应元素的异常值积累，从而引起对应的元素异常效果；\n每种元素异常值的计算互相独立。"
+  },
+  "ElementalThreatLevel": {
+    "Meta": "[url=Keyword.ElementalThreatLevel]{$Keyword.ElementalThreatLevel.Name}[/url]",
+    "Name": "元素异常值",
+    "Description": "受到{$Keyword.Direct.Meta}{$Keyword.Elemental.Meta}伤害时，有几率触发对应元素异常值的积累。\n\n所有元素异常值积累都具有独立的内置间隔计时器，触发元素异常值积累时，对应元素的间隔计时器会重置为0秒；\n所有元素异常值积累的初始触发几率为0%，间隔计时器每有0.05秒，触发对应元素异常值积累的几率便增加5%。\n\n通过直接元素伤害触发元素异常值积累时，随机积累2~4点对应的元素异常值，若有造成{$Keyword.Critical.Meta}效果则再额外积累1点；\n本次触发积累元素异常值时，若所受到的直接元素伤害不超过自身最大生命值的1%，则本次元素异常值积累减半；\n所有元素异常值的初始上限为100点，下限始终为0点。"
+  },
+  "ElementalThreatEffect": {
+    "Meta": "[url=Keyword.ElementalThreatEffect]{$Keyword.ElementalThreatEffect.Name}[/url]",
+    "Name": "元素异常效果",
+    "Description": "只要积累了元素异常值，对应的元素异常效果就会即刻生效；\n部分元素异常效果会被其对应的元素异常状态所覆盖。\n\n元素异常效果的作用程度均会根据对应的元素异常值大小而改变。"
+  },
+  "ElementalThreatStatus": {
+    "Meta": "[url=Keyword.ElementalThreatStatus]{$Keyword.ElementalThreatStatus.Name}[/url]",
+    "Name": "元素异常状态",
+    "Description": "元素异常值的积累达到一定程度后，在条件符合时便会造成对应的元素异常状态；\n\n。"
+  },
+  "IntroductionArt": {
+    "Meta": "[url=Keyword.IntroductionArt]{$Keyword.IntroductionArt.Name}[/url]",
+    "Name": "起手招式",
+    "Description": "仅适用于{$Keyword.Normal.Meta}攻击。\n\n起手招式可在自由态时直接使用。"
+  },
+  "CombinationArt": {
+    "Meta": "[url=Keyword.CombinationArt]{$Keyword.CombinationArt.Name}[/url]",
+    "Name": "连携招式",
+    "Description": "仅适用于{$Keyword.Normal.Meta}攻击。\n\n连携招式可通过{$Keyword.Normal.Meta}攻击派生。"
+  },
+  "ExtinctionArt": {
+    "Meta": "[url=Keyword.ExtinctionArt]{$Keyword.ExtinctionArt.Name}[/url]",
+    "Name": "终结招式",
+    "Description": "仅适用于{$Keyword.Normal.Meta}攻击。\n\n终结招式不能再派生任何{$Keyword.Normal.Meta}攻击。"
+  },
+  "SuperCancel": {
+    "Meta": "[url=Keyword.SuperCancel]{$Keyword.SuperCancel.Name}[/url]",
+    "Name": "超级取消",
+    "Description": "通过{$Keyword.ExtinctionArt.Meta}衔接技能以触发超级取消。\n\n欲触发超级取消，需要额外消耗1格炼气；\n由超级取消派生的技能，造成的伤害提高15%。"
+  },
+  "DreamCancel": {
+    "Meta": "[url=Keyword.DreamCancel]{$Keyword.DreamCancel.Name}[/url]",
+    "Name": "梦幻取消",
+    "Description": "通过技能再衔接技能以触发梦幻取消。\n\n欲触发梦幻取消，需要额外消耗1格炼气；\n由梦幻取消派生的技能，造成的伤害提高35%。"
+  },
+  "Regeneration": {
+    "Meta": "[url=Keyword.Regeneration]{$Keyword.Regeneration.Name}[/url]",
+    "Name": "再生",
+    "Description": "持续间歇性地恢复，间隔初始为1秒"
+  },
+  "Unknown": {
+    "Meta": "[s]{$Keyword.Unknown.Name}[/s]",
+    "Name": "未知关键词名称",
+    "Description": "[s]未知关键词描述[/s]"
+  }
+}

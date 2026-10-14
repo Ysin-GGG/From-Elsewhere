@@ -1,0 +1,75 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Legend of Infinity"
+config/version="Alpha-v0.0.0.1"
+run/main_scene="uid://d3tevf2ojtvyj"
+config/features=PackedStringArray("4.6", "C#", "Mobile")
+boot_splash/image="uid://cx8d5gpux3moa"
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/initial_position=Vector2i(0, -160)
+window/stretch/mode="viewport"
+
+[dotnet]
+
+project/assembly_name="Legend of Infinity"
+
+[layer_names]
+
+2d_render/layer_1="BackgroundFar"
+2d_render/layer_2="BackgroundMedium"
+2d_render/layer_3="BackgroundClose"
+2d_render/layer_5="BehindGround"
+2d_render/layer_6="OnGround"
+2d_render/layer_7="BeforeGround"
+2d_render/layer_9="Particle"
+2d_render/layer_10="Sparkle"
+2d_render/layer_11="LightAndShadow"
+2d_render/layer_12="Distortion"
+2d_render/layer_16="UserInterface"
+2d_physics/layer_1="Border"
+2d_physics/layer_2="Ground"
+2d_physics/layer_3="Wall"
+2d_physics/layer_4="Platform"
+2d_physics/layer_9="Character"
+2d_physics/layer_10="Enemy"
+2d_physics/layer_11="Ally"
+2d_physics/layer_12="Helper"
+2d_physics/layer_17="Hit"
+2d_physics/layer_18="Reversal"
+2d_physics/layer_19="Projectile"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false
+multiplayer_peer/max_channels=4
+
+[steam_server]
+
+initialization/embed_callbacks=false

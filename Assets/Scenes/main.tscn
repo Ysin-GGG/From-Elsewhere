@@ -1,0 +1,1741 @@
+[gd_scene format=3 uid="uid://d3tevf2ojtvyj"]
+
+[ext_resource type="Script" uid="uid://60nfo4f37k0l" path="res://Assets/Scripts/Manager/GameManager.cs" id="1_elf4b"]
+[ext_resource type="Script" uid="uid://b8ot8qorwnlk6" path="res://Assets/Scripts/Manager/InputManager.cs" id="1_guoxd"]
+[ext_resource type="Shader" uid="uid://b3j06idbfdu8f" path="res://Assets/Shaders/Shockwave.gdshader" id="2_4qkp8"]
+[ext_resource type="Texture2D" uid="uid://rwhq5rywb6pl" path="res://Assets/Images/gBot_pieces.png" id="2_elf4b"]
+[ext_resource type="Animation" uid="uid://bjaut5gi3gaev" path="res://Assets/Animations/Move.anim" id="2_qplxx"]
+[ext_resource type="Texture2D" uid="uid://glgy7xefhyka" path="res://Assets/Images/Background/TranquilitySurfaceFar.png" id="2_tm25p"]
+[ext_resource type="Shader" uid="uid://dnbj14j3grxg2" path="res://Assets/Shaders/Slash.gdshader" id="2_uop3n"]
+[ext_resource type="Texture2D" uid="uid://b1k1o6qjnkp1p" path="res://icon.svg" id="3_f8o6k"]
+[ext_resource type="Texture2D" uid="uid://4une57a8quwl" path="res://Assets/Images/Background/TranquilitySurfaceMiddle.png" id="3_qscjt"]
+[ext_resource type="Texture2D" uid="uid://bqrvrdrj2jqw1" path="res://Assets/Images/Effect/Shockwave.png" id="3_uq7jr"]
+[ext_resource type="Texture2D" uid="uid://cjknofvjtjowr" path="res://Assets/Images/Background/TranquilitySurfaceClose.png" id="4_ccmul"]
+[ext_resource type="Texture2D" uid="uid://d08hhxxo4t51a" path="res://Assets/Images/Effect/Slash5.png" id="4_tm25p"]
+[ext_resource type="Texture2D" uid="uid://dfmcuenii7afa" path="res://Assets/Images/Effect/Noise (4).png" id="4_ttgh6"]
+[ext_resource type="AudioStream" uid="uid://qilvgrdl1oym" path="res://Assets/Sounds/SFX/Parry3.wav" id="5_qvima"]
+[ext_resource type="Texture2D" uid="uid://b72ob6xg25i7m" path="res://Assets/Images/Tester.png" id="5_rvsrt"]
+[ext_resource type="AudioStream" uid="uid://d05gx0arscl7k" path="res://Assets/Sounds/Music/Boss_0.wav" id="6_xcy2v"]
+[ext_resource type="Script" uid="uid://b8s24mkpddsnp" path="res://Assets/Scripts/Manager/UIManager.cs" id="7_4357x"]
+[ext_resource type="Script" uid="uid://dfppmiq81a3ac" path="res://Assets/Scripts/Manager/AssetManager.cs" id="7_acsc0"]
+[ext_resource type="Script" uid="uid://wub4s1dsphqh" path="res://Assets/Scripts/UI/CharacterInfo.cs" id="12_4qkp8"]
+[ext_resource type="Texture2D" uid="uid://bn0qvua35shbi" path="res://Assets/Images/HUD/StatBar.png" id="16_ccmul"]
+[ext_resource type="Texture2D" uid="uid://bhfjm1eyt7x0r" path="res://Assets/Images/HUD/StatFill.png" id="17_cun2r"]
+[ext_resource type="Texture2D" uid="uid://upbgeiu0hbxp" path="res://Assets/Images/Loot/Loot.png" id="17_dxo86"]
+[ext_resource type="Texture2D" uid="uid://cm8su4fjrhlvm" path="res://Assets/Images/Sword.png" id="19_qvima"]
+[ext_resource type="Texture2D" uid="uid://2cpoxe7oaeb6" path="res://Assets/Images/Pixel.png" id="21_xcy2v"]
+[ext_resource type="Theme" uid="uid://dbp8efhcgdg1x" path="res://Assets/Themes/UI1.tres" id="23_a8up6"]
+[ext_resource type="Script" uid="uid://ccve5wvkuydv1" path="res://Assets/Scripts/UI/ManualPanel.cs" id="24_e0qyk"]
+[ext_resource type="Script" uid="uid://bifwe5mbv1wsu" path="res://Assets/Scripts/UI/Elements/UIProgressFill.cs" id="26_nqgrc"]
+[ext_resource type="Script" uid="uid://rxon3l2qao2t" path="res://Assets/Scripts/UI/Elements/UIProgressBar.cs" id="27_730o7"]
+[ext_resource type="Shader" uid="uid://65xitw8ht52d" path="res://Assets/Shaders/ProgressFill.gdshader" id="27_shq5y"]
+[ext_resource type="Texture2D" uid="uid://btwikclnbgs3a" path="res://Assets/Images/UI/Panel/Panel_1.png" id="29_2whn1"]
+[ext_resource type="Texture2D" uid="uid://btvxtsycvlar2" path="res://Assets/Images/Icon/Skill/Blade_0_0.png" id="29_cma7p"]
+[ext_resource type="Shader" uid="uid://dnxowkqxjlbht" path="res://Assets/Scenes/SkillIcon.gdshader" id="29_qvima"]
+[ext_resource type="Texture2D" uid="uid://kf2x0aff0udw" path="res://Assets/Images/Icon/Skill/Blade_0_1.png" id="31_hlqjr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qkp8"]
+shader = ExtResource("2_4qkp8")
+shader_parameter/Intensity = 0.1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ltoj3"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_uq7jr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9817073, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ltoj3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltoj3"]
+shader = ExtResource("2_uop3n")
+shader_parameter/Speed = 1.0
+shader_parameter/Threshold = 0.01
+shader_parameter/SlashOffset = Vector2(0.01, 0)
+shader_parameter/NoiseOffset = Vector2(0.5, 0)
+shader_parameter/Noise = ExtResource("4_ttgh6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0qyk"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8o6k"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tm25p"]
+size = Vector2(128, 128)
+
+[sub_resource type="Animation" id="Animation_nacht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/LeftShould:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/RightShould:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg/LeftLeg2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg/RightLeg2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rvsrt"]
+resource_name = "Stand"
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/LeftShould:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.2217304763960306]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/RightShould:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0167),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.2217304763960306]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.3490658503988659]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3490658503988659]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg/LeftLeg2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.17453292519943295]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg/RightLeg2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.17453292519943295]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GameManager/Enemies/Entity2/Skeleton2D/Hip:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_elf4b"]
+_data = {
+&"Move": ExtResource("2_qplxx"),
+&"RESET": SubResource("Animation_nacht"),
+&"Stand": SubResource("Animation_rvsrt")
+}
+
+[sub_resource type="Curve" id="Curve_dxo86"]
+_data = [Vector2(0.008720927, 0), 0.0, 0.0, 0, 0, Vector2(0.2994186, 1), 0.0, 0.0, 0, 0, Vector2(0.70348835, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_a8up6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.29651162, 1), 0.0, 0.0, 0, 0, Vector2(0.6976744, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_e0qyk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_747jk"]
+curve_x = SubResource("Curve_dxo86")
+curve_y = SubResource("Curve_a8up6")
+curve_z = SubResource("Curve_e0qyk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nqgrc"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 98, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+scale_min = 16.0
+scale_max = 16.0
+scale_curve = SubResource("CurveXYZTexture_747jk")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vlji8"]
+friction = 0.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vlji8"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f1jyc"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ttgh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccmul"]
+size = Vector2(320, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nb11o"]
+texture = ExtResource("16_ccmul")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 32.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xcy2v"]
+texture = ExtResource("17_cun2r")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 32.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 0, 0.24705882, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ccmul"]
+texture = ExtResource("17_cun2r")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 32.0
+texture_margin_bottom = 8.0
+modulate_color = Color(0, 0.2509804, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cun2r"]
+texture = ExtResource("17_cun2r")
+texture_margin_left = 16.0
+texture_margin_top = 8.0
+texture_margin_right = 32.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 0.7490196, 0.24705882, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttgh6"]
+bg_color = Color(1, 0.12156863, 0.12156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qkp8"]
+bg_color = Color(0.12156863, 0.12156863, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uq7jr"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uop3n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_747jk"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e0qyk"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8up6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dxo86"]
+texture = ExtResource("21_xcy2v")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb11o"]
+bg_color = Color(1, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcy2v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxo86"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cma7p"]
+shader = ExtResource("27_shq5y")
+shader_parameter/Color = Color(0.24705882, 1, 1, 1)
+shader_parameter/Value = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usbst"]
+shader = ExtResource("29_qvima")
+shader_parameter/FrameVelocity = Vector2(0, 0)
+shader_parameter/Color = Color(0.24705882, 0.24705882, 0.24705882, 1)
+shader_parameter/Flash = Color(1, 1, 1, 1)
+shader_parameter/CooldownValue = 1.0
+shader_parameter/FlashValue = 0.0
+shader_parameter/Offset = 0.0
+shader_parameter/FrameAdd = 0.0
+shader_parameter/FrameMul = 0.0
+shader_parameter/Clip = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvima"]
+texture = ExtResource("29_2whn1")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[node name="Node" type="Node" unique_id=1581472218]
+
+[node name="AssetManager" type="Node" parent="." unique_id=1833870964]
+script = ExtResource("7_acsc0")
+
+[node name="Parallax2D3" type="Parallax2D" parent="AssetManager" unique_id=177465447]
+scroll_scale = Vector2(0.618, 0.618)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="AssetManager/Parallax2D3" unique_id=1729237122]
+position = Vector2(960, 0)
+scale = Vector2(1.875, 2.026)
+texture = ExtResource("2_tm25p")
+
+[node name="Parallax2D2" type="Parallax2D" parent="AssetManager" unique_id=1441002579]
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="AssetManager/Parallax2D2" unique_id=198974752]
+position = Vector2(960, 0)
+scale = Vector2(1.875, 2.026)
+texture = ExtResource("4_ccmul")
+
+[node name="Parallax2D" type="Parallax2D" parent="AssetManager" unique_id=2144808794]
+scroll_scale = Vector2(1.618, 1.618)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="AssetManager/Parallax2D" unique_id=611855394]
+position = Vector2(960, 0)
+scale = Vector2(1.875, 2.057)
+texture = ExtResource("3_qscjt")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="AssetManager" unique_id=1247125609]
+stream = ExtResource("5_qvima")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AssetManager" unique_id=1705814098]
+stream = ExtResource("6_xcy2v")
+area_mask = 0
+
+[node name="EffectManager" type="Node" parent="." unique_id=1468319752]
+
+[node name="Shockwave" type="CanvasLayer" parent="EffectManager" unique_id=441419706]
+visible = false
+follow_viewport_enabled = true
+
+[node name="Obj1" type="Sprite2D" parent="EffectManager/Shockwave" unique_id=106821619]
+material = SubResource("ShaderMaterial_4qkp8")
+texture = ExtResource("3_uq7jr")
+
+[node name="SlashDistortion" type="CanvasLayer" parent="EffectManager" unique_id=613115067]
+visible = false
+follow_viewport_enabled = true
+
+[node name="Line2D2" type="Line2D" parent="EffectManager/SlashDistortion" unique_id=678528632]
+material = SubResource("CanvasItemMaterial_ltoj3")
+position = Vector2(0, -64)
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 128.0
+width_curve = SubResource("Curve_uq7jr")
+gradient = SubResource("Gradient_ltoj3")
+texture = ExtResource("4_tm25p")
+texture_mode = 2
+joint_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="EffectManager/SlashDistortion/Line2D2" unique_id=1940655118]
+material = SubResource("ShaderMaterial_ltoj3")
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 128.0
+width_curve = SubResource("Curve_uq7jr")
+gradient = SubResource("Gradient_ltoj3")
+texture = ExtResource("4_tm25p")
+texture_mode = 2
+joint_mode = 2
+
+[node name="GameManager" type="Node" parent="." unique_id=1411033211 node_paths=PackedStringArray("characters", "enemies", "localCamera", "trail")]
+script = ExtResource("1_elf4b")
+characters = NodePath("Characters")
+enemies = NodePath("Enemies")
+localCamera = NodePath("Characters/LocalCamera")
+trail = NodePath("../EffectManager/SlashDistortion/Line2D2")
+
+[node name="Characters" type="Node" parent="GameManager" unique_id=948214674]
+
+[node name="LocalCamera" type="Camera2D" parent="GameManager/Characters" unique_id=190047598]
+offset = Vector2(0, -240)
+limit_left = -8000
+limit_right = 8000
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+rotation_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/Characters" unique_id=80606555]
+texture = ExtResource("3_f8o6k")
+offset = Vector2(0, -64)
+
+[node name="HitCollision" type="Area2D" parent="GameManager/Characters/Sprite2D" unique_id=671476860]
+collision_layer = 65536
+collision_mask = 3840
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Characters/Sprite2D/HitCollision" unique_id=1671829708]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_e0qyk")
+debug_color = Color(1, 0, 0, 0.5019608)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="GameManager/Characters" unique_id=1850339667]
+visible = false
+collision_layer = 256
+collision_mask = 15
+up_direction = Vector2(0, 1)
+slide_on_ceiling = false
+floor_snap_length = 8.0
+platform_floor_layers = 4278190095
+platform_wall_layers = 15
+safe_margin = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/Characters/CharacterBody2D" unique_id=1578182874]
+texture = ExtResource("3_f8o6k")
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Characters/CharacterBody2D" unique_id=1884162743]
+shape = SubResource("RectangleShape2D_f8o6k")
+disabled = true
+one_way_collision_margin = 32.0
+debug_color = Color(0, 0, 1, 0.5019608)
+
+[node name="HitCollision" type="Area2D" parent="GameManager/Characters/CharacterBody2D" unique_id=568299309]
+visible = false
+collision_layer = 65536
+collision_mask = 3840
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Characters/CharacterBody2D/HitCollision" unique_id=984724926]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_f8o6k")
+one_way_collision_margin = 32.0
+debug_color = Color(0, 0, 1, 0.5019608)
+
+[node name="ReversalCollision" type="Area2D" parent="GameManager/Characters/CharacterBody2D" unique_id=685083618]
+visible = false
+collision_layer = 131072
+collision_mask = 69376
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/Characters/CharacterBody2D/ReversalCollision" unique_id=1127873967]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_tm25p")
+debug_color = Color(1, 0, 0, 0.5019608)
+
+[node name="Enemies" type="Node" parent="GameManager" unique_id=332108403]
+
+[node name="Entity" type="Node2D" parent="GameManager/Enemies" unique_id=1654309384]
+visible = false
+position = Vector2(0, 742)
+rotation = 0.00043794778
+scale = Vector2(0.49999994, 0.49999994)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameManager/Enemies/Entity" unique_id=1912447369]
+root_node = NodePath("../../../..")
+libraries/ = SubResource("AnimationLibrary_elf4b")
+autoplay = &"Move"
+
+[node name="LArm" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=1151764547]
+position = Vector2(78, 143)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(221.2461, 24.267128, 177.87067, 47.561348, 181.8869, 86.92055, 178.67392, 210.6209, 179.47717, 301.38803, 214.01685, 366.4512, 267.83453, 360.0252, 303.1775, 312.6335, 249.3598, 196.96567, 275.06378, 102.18228, 279.08002, 38.72561, 226.06561, 18.644384, 219.6405, 98.690994, 217.34204, 196.37843, 233.43164, 290.61804)
+uv = PackedVector2Array(221.2461, 24.267128, 177.87067, 47.561348, 181.8869, 86.92055, 178.67392, 210.6209, 179.47717, 301.38803, 214.01685, 366.4512, 267.83453, 360.0252, 303.1775, 312.6335, 249.3598, 196.96567, 275.06378, 102.18228, 279.08002, 38.72561, 226.06561, 18.644384, 219.6405, 98.690994, 217.34204, 196.37843, 233.43164, 290.61804)
+polygons = [PackedInt32Array(11, 10, 9, 12, 2, 1), PackedInt32Array(2, 3, 13, 8, 9, 12), PackedInt32Array(3, 4, 5, 6, 7, 8, 13)]
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould", PackedFloat32Array(1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+internal_vertex_count = 3
+
+[node name="LLeg" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=463117658]
+position = Vector2(-33, -15)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(316.01813, 383.8051, 281.80615, 393.42722, 277.52966, 466.1277, 248.66333, 515.30743, 243.31769, 693.85126, 403.68634, 698.12775, 412.23932, 655.36273, 395.13336, 640.395, 389.78778, 598.69916, 353.4375, 592.28436, 339.53888, 477.88806, 350.23016, 399.84198)
+uv = PackedVector2Array(316.01813, 383.8051, 281.80615, 393.42722, 277.52966, 466.1277, 248.66333, 515.30743, 243.31769, 693.85126, 403.68634, 698.12775, 412.23932, 655.36273, 395.13336, 640.395, 389.78778, 598.69916, 353.4375, 592.28436, 339.53888, 477.88806, 350.23016, 399.84198)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RLeg" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=1331595943]
+position = Vector2(103.99561, -10.04559)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(93.89996, 385.7898, 58.71631, 394.41974, 56.060944, 473.41693, 27.515717, 505.9452, 18.221924, 685.84644, 183.51862, 689.82947, 184.84631, 651.32666, 168.91412, 643.36053, 162.2757, 604.19385, 128.41974, 594.2362, 108.504456, 543.7842, 121.11749, 480.05536, 121.11749, 400.3943)
+uv = PackedVector2Array(93.89996, 385.7898, 58.71631, 394.41974, 56.060944, 473.41693, 27.515717, 505.9452, 18.221924, 685.84644, 183.51862, 689.82947, 184.84631, 651.32666, 168.91412, 643.36053, 162.2757, 604.19385, 128.41974, 594.2362, 108.504456, 543.7842, 121.11749, 480.05536, 121.11749, 400.3943)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Body" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=1572995302]
+position = Vector2(-188, 97)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(430.92343, 14.971739, 391.3087, 38.1942, 383.11252, 83.27309, 346.91278, 106.49555, 344.86377, 212.36264, 367.4032, 241.04921, 345.54678, 275.88287, 354.42593, 323.0108, 429.5574, 353.06342, 491.71164, 318.22974, 495.12674, 269.73578, 476.68533, 256.75854, 522.44727, 210.3136, 521.0813, 135.18211, 488.97958, 86.00514, 480.78342, 33.413105)
+uv = PackedVector2Array(430.92343, 14.971739, 391.3087, 38.1942, 383.11252, 83.27309, 346.91278, 106.49555, 344.86377, 212.36264, 367.4032, 241.04921, 345.54678, 275.88287, 354.42593, 323.0108, 429.5574, 353.06342, 491.71164, 318.22974, 495.12674, 269.73578, 476.68533, 256.75854, 522.44727, 210.3136, 521.0813, 135.18211, 488.97958, 86.00514, 480.78342, 33.413105)
+bones = ["Body", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Body/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Head" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=1371580904]
+position = Vector2(-397, -404)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(655.61176, 243.25084, 552.0264, 259.54514, 467.0633, 359.6388, 485.68536, 492.32108, 546.2071, 534.22076, 801.09674, 528.40137, 818.5549, 350.32776, 770.8359, 267.6923)
+uv = PackedVector2Array(655.61176, 243.25084, 552.0264, 259.54514, 467.0633, 359.6388, 485.68536, 492.32108, 546.2071, 534.22076, 801.09674, 528.40137, 818.5549, 350.32776, 770.8359, 267.6923)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Mouth" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=2124966200]
+position = Vector2(-386, -500)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(642.8129, 562.1543, 818.55865, 560.9904, 815.0671, 644.7898, 724.2845, 705.3115, 525.26105, 683.19775, 462.41156, 602.8901, 476.3781, 558.66266)
+uv = PackedVector2Array(642.8129, 562.1543, 818.55865, 560.9904, 815.0671, 644.7898, 724.2845, 705.3115, 525.26105, 683.19775, 462.41156, 602.8901, 476.3781, 558.66266)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)]
+
+[node name="RArm" type="Polygon2D" parent="GameManager/Enemies/Entity" unique_id=782179738]
+position = Vector2(73.00001, 158.00002)
+rotation = -0.0013731134
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("2_elf4b")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(80.81055, 3.2074852, 25.216064, 22.451725, 30.561707, 73.7697, 16.663086, 183.88953, 13.455688, 276.90335, 45.52942, 360.29504, 110.74603, 359.22592, 135.33588, 333.56696, 111.815186, 188.16602, 141.75067, 40.626842)
+uv = PackedVector2Array(80.81055, 3.2074852, 25.216064, 22.451725, 30.561707, 73.7697, 16.663086, 183.88953, 13.455688, 276.90335, 45.52942, 360.29504, 110.74603, 359.22592, 135.33588, 333.56696, 111.815186, 188.16602, 141.75067, 40.626842)
+bones = ["Body", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/LShould/LArm/LHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Body/RShould/RArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/RShould/RArm/RHand", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/LLeg/LCalf/LFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Body/Hip/RLeg/RCalf/RFoot", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="GameManager/Enemies/Entity" unique_id=1326357682]
+rotation = 0.004878159
+scale = Vector2(1.0000002, 1.0000002)
+
+[node name="Body" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D" unique_id=886706286]
+position = Vector2(252, 191)
+rest = Transform2D(1, 0, 0, 1, 252, 191)
+
+[node name="Head" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body" unique_id=1872366766]
+position = Vector2(0, -20)
+scale = Vector2(0.99999976, 0.99999976)
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="LShould" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body" unique_id=1750123583]
+position = Vector2(64, 28)
+scale = Vector2(0.99999946, 0.99999946)
+rest = Transform2D(1, 0, 0, 1, 64, 28)
+
+[node name="LArm" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/LShould" unique_id=1468821614]
+position = Vector2(-24, 128)
+scale = Vector2(0.99999934, 0.99999934)
+rest = Transform2D(1, 0, 0, 1, -24, 128)
+
+[node name="LHand" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/LShould/LArm" unique_id=1442143531]
+position = Vector2(24, 96)
+rest = Transform2D(1, 0, 0, 1, 24, 96)
+
+[node name="RShould" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body" unique_id=1594606253]
+position = Vector2(-100, 48)
+scale = Vector2(0.9999995, 0.9999995)
+rest = Transform2D(1, 0, 0, 1, -100, 48)
+
+[node name="RArm" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/RShould" unique_id=1264922678]
+position = Vector2(-16, 108)
+scale = Vector2(0.9999995, 0.9999995)
+rest = Transform2D(1, 0, 0, 1, -16, 108)
+
+[node name="RHand" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/RShould/RArm" unique_id=711068455]
+position = Vector2(16, 112)
+rest = Transform2D(1, 0, 0, 1, 16, 112)
+
+[node name="Hip" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body" unique_id=1395289375]
+position = Vector2(0, 200)
+rest = Transform2D(1, 0, 0, 1, 0, 200)
+
+[node name="LLeg" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip" unique_id=1632950816]
+position = Vector2(45, 30)
+scale = Vector2(0.9999994, 0.9999994)
+rest = Transform2D(1, 0, 0, 1, 45, 30)
+
+[node name="LCalf" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip/LLeg" unique_id=25633966]
+position = Vector2(-30, 65)
+scale = Vector2(0.9999995, 0.9999995)
+rest = Transform2D(1, 0, 0, 1, -30, 65)
+
+[node name="LFoot" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip/LLeg/LCalf" unique_id=1902690749]
+position = Vector2(12, 128)
+rest = Transform2D(1, 0, 0, 1, 12, 128)
+
+[node name="RLeg" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip" unique_id=1826542657]
+position = Vector2(-45, 30)
+scale = Vector2(0.9999996, 0.9999996)
+rest = Transform2D(1, 0, 0, 1, -45, 30)
+
+[node name="RCalf" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip/RLeg" unique_id=16382907]
+position = Vector2(-30, 65)
+rotation = 0.0022894864
+scale = Vector2(0.9999999, 0.9999999)
+rest = Transform2D(1, 0, 0, 1, -30, 65)
+
+[node name="RFoot" type="Bone2D" parent="GameManager/Enemies/Entity/Skeleton2D/Body/Hip/RLeg/RCalf" unique_id=161603915]
+position = Vector2(12, 128)
+rest = Transform2D(1, 0, 0, 1, 12, 128)
+
+[node name="Entity2" type="Node2D" parent="GameManager/Enemies" unique_id=1678066639]
+visible = false
+rotation = 0.00043794778
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameManager/Enemies/Entity2" unique_id=1442398182]
+root_node = NodePath("../../../..")
+libraries/ = SubResource("AnimationLibrary_elf4b")
+autoplay = &"Move"
+
+[node name="Polygons" type="Node2D" parent="GameManager/Enemies/Entity2" unique_id=1634345083]
+position = Vector2(-509.24478, -558.77704)
+rotation = -0.00058178423
+
+[node name="Head" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1784825578]
+position = Vector2(10.9946785, 37.001583)
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(377.53528, 346.2363, 628.8842, 345.55328, 629.5672, 120.8419, 378.9013, 121.52492)
+uv = PackedVector2Array(377.53528, 346.2363, 628.8842, 345.55328, 629.5672, 120.8419, 378.9013, 121.52492)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(1, 1, 1, 1), "Hip/Chest/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="Chest" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1857863312]
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(486.38507, 360.0628, 536.2365, 359.23193, 536.2365, 572.7624, 490.53937, 572.7624)
+uv = PackedVector2Array(486.38507, 360.0628, 536.2365, 359.23193, 536.2365, 572.7624, 490.53937, 572.7624)
+bones = ["Hip", PackedFloat32Array(0, 0, 1, 1), "Hip/Chest", PackedFloat32Array(1, 1, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftArm1" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=803659017]
+position = Vector2(897.198, -24)
+rotation = 1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(445.73502, 497.07324, 416.13638, 497.07324, 416.13638, 385.72598, 442.9161, 386.07834)
+uv = PackedVector2Array(445.73502, 497.07324, 416.13638, 497.07324, 416.13638, 385.72598, 442.9161, 386.07834)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 1, 1), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(1, 1, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftArm2" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1528971925]
+position = Vector2(943.004, -24)
+rotation = 1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(414.4258, 510.41483, 445.0701, 510.98233, 445.6376, 624.47974, 418.39822, 624.47974)
+uv = PackedVector2Array(414.4258, 510.41483, 445.0701, 510.98233, 445.6376, 624.47974, 418.39822, 624.47974)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(1, 1, 1, 1), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftHand" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1950204107]
+position = Vector2(970.004, -24)
+rotation = 1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(417.5384, 630.45605, 444.8255, 630.45605, 444.8255, 669.25494, 417.11203, 669.25494)
+uv = PackedVector2Array(417.5384, 630.45605, 444.8255, 630.45605, 444.8255, 669.25494, 417.11203, 669.25494)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(1, 1, 1, 1), "Hip/Chest/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightArm1" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=267671867]
+position = Vector2(120, 1000)
+rotation = -1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(571.59235, 381.34073, 613.4786, 381.34073, 613.4786, 494.63953, 571.59235, 504.25275)
+uv = PackedVector2Array(571.59235, 381.34073, 613.4786, 381.34073, 613.4786, 494.63953, 571.59235, 504.25275)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(1, 1, 1, 1), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightArm2" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=372856564]
+position = Vector2(75.85617, 1000.011)
+rotation = -1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(573.94666, 507.98935, 619.51587, 509.23782, 610.77655, 625.3457, 574.57086, 626.5941)
+uv = PackedVector2Array(573.94666, 507.98935, 619.51587, 509.23782, 610.77655, 625.3457, 574.57086, 626.5941)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(1, 1, 1, 1), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightHand" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1943825772]
+position = Vector2(49.856174, 1000.00726)
+rotation = -1.5707964
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(581.5692, 626.24915, 604.5927, 625.3964, 607.5773, 668.88525, 583.70105, 668.03253)
+uv = PackedVector2Array(581.5692, 626.24915, 604.5927, 625.3964, 607.5773, 668.88525, 583.70105, 668.03253)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(1, 1, 1, 1), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftLeg1" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1311825434]
+position = Vector2(394.03055, -211.94334)
+rotation = 0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(471.65656, 595.63556, 496.85065, 595.2479, 496.07544, 711.9159, 470.49374, 711.9159)
+uv = PackedVector2Array(471.65656, 595.63556, 496.85065, 595.2479, 496.07544, 711.9159, 470.49374, 711.9159)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(1, 1, 1, 1), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftLeg2" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=163108825]
+position = Vector2(415.0357, -247.94034)
+rotation = 0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(467.72668, 723.5809, 497.64874, 722.5491, 497.13284, 836.5624, 470.30618, 837.07825)
+uv = PackedVector2Array(467.72668, 723.5809, 497.64874, 722.5491, 497.13284, 836.5624, 470.30618, 837.07825)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(1, 1, 1, 1), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="LeftFoot" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1837417596]
+position = Vector2(451.03357, -232.93515)
+rotation = 0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(432.2053, 820.6525, 455.109, 821.0049, 455.109, 881.61163, 433.2624, 881.2593)
+uv = PackedVector2Array(432.2053, 820.6525, 455.109, 821.0049, 455.109, 881.61163, 433.2624, 881.2593)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(1, 1, 1, 1), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightLeg1" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1286105142]
+position = Vector2(-256.22562, 300.43527)
+rotation = -0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(522.4581, 593.7947, 548.0398, 593.3683, 548.4662, 706.7804, 525.0163, 707.2068)
+uv = PackedVector2Array(522.4581, 593.7947, 548.0398, 593.3683, 548.4662, 706.7804, 525.0163, 707.2068)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(1, 1, 1, 1), "Hip/RightLeg/RightLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightLeg2" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=300699307]
+position = Vector2(-279.03772, 261.9599)
+rotation = -0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(522.84564, 725.4714, 546.7645, 725.0024, 548.1715, 841.3138, 523.7837, 838.4998)
+uv = PackedVector2Array(522.84564, 725.4714, 546.7645, 725.0024, 548.1715, 841.3138, 523.7837, 838.4998)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2", PackedFloat32Array(1, 1, 1, 1), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(0, 0, 0, 0)]
+
+[node name="RightFoot" type="Polygon2D" parent="GameManager/Enemies/Entity2/Polygons" unique_id=1456073477]
+position = Vector2(-320.04016, 278.954)
+rotation = -0.5235988
+texture = ExtResource("5_rvsrt")
+skeleton = NodePath("../../Skeleton2D")
+polygon = PackedVector2Array(567.3026, 821.30505, 595.4918, 820.2479, 595.1394, 881.91174, 568.7121, 881.91174)
+uv = PackedVector2Array(567.3026, 821.30505, 595.4918, 820.2479, 595.1394, 881.91174, 568.7121, 881.91174)
+bones = ["Hip", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/LeftShould/LeftArm/LeftHand", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm", PackedFloat32Array(0, 0, 0, 0), "Hip/Chest/RightShould/RightArm/RightHand", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/LeftLeg/LeftLeg2/LeftFoot", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2", PackedFloat32Array(0, 0, 0, 0), "Hip/RightLeg/RightLeg2/RightFoot", PackedFloat32Array(1, 1, 1, 1)]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="GameManager/Enemies/Entity2" unique_id=1680581860]
+scale = Vector2(1.0000002, 1.0000002)
+
+[node name="Hip" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D" unique_id=77183278]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Chest" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip" unique_id=1273119314]
+position = Vector2(0, -154)
+rest = Transform2D(1, 0, 0, 1, 0, -150)
+
+[node name="Head" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest" unique_id=1231456915]
+position = Vector2(0, -30)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(1.5, 0, 0, 1.5, 0, -30)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = -90.0
+
+[node name="LeftShould" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest" unique_id=2088929100]
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 0, 0)
+
+[node name="LeftArm" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/LeftShould" unique_id=1849341152]
+position = Vector2(-95, 0)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, -95, 0)
+
+[node name="LeftHand" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/LeftShould/LeftArm" unique_id=2107426458]
+position = Vector2(-85, 0)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, -85, 0)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 180.0
+
+[node name="RightShould" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest" unique_id=1658647034]
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 0, 0)
+
+[node name="RightArm" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/RightShould" unique_id=1499839137]
+position = Vector2(95, 0)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 95, 0)
+
+[node name="RightHand" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/Chest/RightShould/RightArm" unique_id=1866135750]
+position = Vector2(85, 0)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 85, 0)
+
+[node name="LeftLeg" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip" unique_id=1623620266]
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 0, 0)
+
+[node name="LeftLeg2" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg" unique_id=88877227]
+position = Vector2(-45, 75)
+scale = Vector2(0.99999976, 0.99999976)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, -45, 75)
+
+[node name="LeftFoot" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/LeftLeg/LeftLeg2" unique_id=804084044]
+position = Vector2(-45, 75)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, -45, 75)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 120.0
+
+[node name="RightLeg" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip" unique_id=1395406552]
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="RightLeg2" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg" unique_id=2084404128]
+position = Vector2(45, 75)
+scale = Vector2(0.9999998, 0.9999998)
+rest = Transform2D(1, 0, 0, 1, 45, 75)
+
+[node name="RightFoot" type="Bone2D" parent="GameManager/Enemies/Entity2/Skeleton2D/Hip/RightLeg/RightLeg2" unique_id=1633078704]
+position = Vector2(45, 75)
+scale = Vector2(0.99999994, 0.99999994)
+rest = Transform2D(0.99999994, 0, 0, 0.99999994, 45, 75)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 60.0
+
+[node name="Loots" type="Node" parent="GameManager" unique_id=787557944]
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/Loots" unique_id=1531547437]
+position = Vector2(500, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_dxo86")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="GameManager/Loots/Sprite2D" unique_id=574139228]
+visible = false
+texture = ExtResource("21_xcy2v")
+fixed_fps = 0
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_nqgrc")
+
+[node name="Terrain" type="Node" parent="GameManager" unique_id=1723627924]
+
+[node name="Border" type="StaticBody2D" parent="GameManager/Terrain" unique_id=2013296982]
+collision_layer = 7
+collision_mask = 3840
+collision_priority = 32767.0
+physics_material_override = SubResource("PhysicsMaterial_vlji8")
+
+[node name="Left" type="CollisionShape2D" parent="GameManager/Terrain/Border" unique_id=1364130963]
+position = Vector2(-8000, 0)
+shape = SubResource("WorldBoundaryShape2D_vlji8")
+one_way_collision_margin = 128.0
+debug_color = Color(0, 1, 0, 0.5019608)
+
+[node name="Right" type="CollisionShape2D" parent="GameManager/Terrain/Border" unique_id=664057847]
+position = Vector2(8000, 0)
+shape = SubResource("WorldBoundaryShape2D_f1jyc")
+one_way_collision_margin = 128.0
+debug_color = Color(0, 1, 0, 0.5019608)
+
+[node name="Bottom" type="CollisionShape2D" parent="GameManager/Terrain/Border" unique_id=744297164]
+shape = SubResource("WorldBoundaryShape2D_ttgh6")
+one_way_collision_margin = 128.0
+debug_color = Color(0, 1, 0, 0.5019608)
+
+[node name="Platform" type="StaticBody2D" parent="GameManager/Terrain" unique_id=228697315]
+collision_layer = 8
+collision_mask = 3840
+physics_material_override = SubResource("PhysicsMaterial_vlji8")
+
+[node name="Segment1" type="CollisionShape2D" parent="GameManager/Terrain/Platform" unique_id=2036902340]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_ccmul")
+one_way_collision = true
+debug_color = Color(1, 1, 0, 0.5019608)
+
+[node name="Segment2" type="CollisionShape2D" parent="GameManager/Terrain/Platform" unique_id=727432479]
+position = Vector2(0, -200)
+shape = SubResource("RectangleShape2D_ccmul")
+one_way_collision = true
+debug_color = Color(1, 1, 0, 0.5019608)
+
+[node name="Segment3" type="CollisionShape2D" parent="GameManager/Terrain/Platform" unique_id=1145689656]
+position = Vector2(0, -300)
+shape = SubResource("RectangleShape2D_ccmul")
+one_way_collision = true
+debug_color = Color(1, 1, 0, 0.5019608)
+
+[node name="Segment4" type="CollisionShape2D" parent="GameManager/Terrain/Platform" unique_id=2135247522]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_ccmul")
+one_way_collision = true
+debug_color = Color(1, 1, 0, 0.5019608)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager" unique_id=1524747980]
+position = Vector2(731, -213)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("19_qvima")
+offset = Vector2(0, -320)
+
+[node name="UIManager" type="Node" parent="." unique_id=1100632328 node_paths=PackedStringArray("DebugInfo", "_CharacterInfo", "_Sliders", "_Options", "KwPsControl", "CbTsControl", "_SwordBreezeBar", "_ScreenCanvas")]
+script = ExtResource("7_4357x")
+DebugInfo = NodePath("UI/Debug")
+_CharacterInfo = NodePath("UI/CharacterInfo")
+_Sliders = NodePath("UI/TabContainer/Sound/MarginContainer/VBoxContainer")
+_Options = NodePath("UI/TabContainer")
+KwPsControl = NodePath("UI/KwPsControl")
+CbTsControl = NodePath("CbTsControl")
+_SwordBreezeBar = NodePath("UI/UIProgressBar")
+_ScreenCanvas = NodePath("UI")
+
+[node name="CbTsControl" type="Control" parent="UIManager" unique_id=1582384924]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="UIManager" unique_id=611353537]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI" unique_id=1055246598]
+offset_left = 3.0
+offset_top = 155.0
+offset_right = 483.0
+offset_bottom = 195.0
+theme_override_constants/separation = -7
+
+[node name="Life" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=1487808486]
+custom_minimum_size = Vector2(480, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+
+[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Life" unique_id=1426987369]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xcy2v")
+
+[node name="Mana" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=819411058]
+custom_minimum_size = Vector2(440, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+
+[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Mana" unique_id=760082057]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ccmul")
+
+[node name="Mana2" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=1387135626]
+custom_minimum_size = Vector2(400, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+
+[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Mana2" unique_id=993768279]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cun2r")
+
+[node name="HeadUpDisplay" type="VBoxContainer" parent="UIManager/UI" unique_id=2021566753]
+offset_right = 256.0
+offset_bottom = 80.0
+
+[node name="Layer1" type="HBoxContainer" parent="UIManager/UI/HeadUpDisplay" unique_id=108799063]
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="UIManager/UI/HeadUpDisplay/Layer1" unique_id=541401646]
+layout_mode = 2
+texture = ExtResource("3_f8o6k")
+expand_mode = 2
+
+[node name="LifeMana" type="VBoxContainer" parent="UIManager/UI/HeadUpDisplay/Layer1" unique_id=746004242]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="LifeBar" type="Panel" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana" unique_id=2003784321]
+clip_contents = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="LifeValue" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/LifeBar" unique_id=692272555]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ttgh6")
+
+[node name="Label" type="Label" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/LifeBar" unique_id=1086766087]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Life: 3000/3000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaBar" type="Panel" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana" unique_id=2144343813]
+clip_contents = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="ManaValue" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/ManaBar" unique_id=491301701]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_4qkp8")
+
+[node name="Label" type="Label" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/ManaBar" unique_id=945990439]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Mana: 3000/3000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpiritBar" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay" unique_id=300974767]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_uq7jr")
+
+[node name="Margin" type="MarginContainer" parent="UIManager/UI/HeadUpDisplay/SpiritBar" unique_id=422317835]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Count" type="GridContainer" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin" unique_id=1556753980]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+columns = 3
+
+[node name="Spirit" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=885388392]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spirit2" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=1023424083]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spirit3" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=1594846091]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CharacterInfo" type="PanelContainer" parent="UIManager/UI" unique_id=1603761287 node_paths=PackedStringArray("DualColumnLeft", "DualColumnRight")]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(600, 800)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -468.0
+offset_right = 300.0
+offset_bottom = 468.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_4qkp8")
+DualColumnLeft = NodePath("Margin/Content/Attributes/PanelContainer/MarginContainer/DualColumnLeft")
+DualColumnRight = NodePath("Margin/Content/Attributes/PanelContainer/MarginContainer/DualColumnName")
+
+[node name="Margin" type="MarginContainer" parent="UIManager/UI/CharacterInfo" unique_id=367935640]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Content" type="VBoxContainer" parent="UIManager/UI/CharacterInfo/Margin" unique_id=792574400]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Equipments" type="HBoxContainer" parent="UIManager/UI/CharacterInfo/Margin/Content" unique_id=1308459195]
+layout_mode = 2
+
+[node name="LeftSlots" type="VBoxContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments" unique_id=1779246111]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Slot_Head" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots" unique_id=620789899]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots/Slot_Head" unique_id=144263307]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Chest" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots" unique_id=1923542856]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots/Slot_Chest" unique_id=1379889069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Waist" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots" unique_id=32410005]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots/Slot_Waist" unique_id=734295560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Leg" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots" unique_id=1253747970]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots/Slot_Leg" unique_id=313028565]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Foot" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots" unique_id=1860397043]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/LeftSlots/Slot_Foot" unique_id=51225627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightSlots" type="VBoxContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments" unique_id=541972503]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Slot_Weapon" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots" unique_id=706005722]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots/Slot_Weapon" unique_id=1294417160]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Accessory1" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots" unique_id=367249493]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots/Slot_Accessory1" unique_id=1164583200]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Accessory2" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots" unique_id=988180516]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots/Slot_Accessory2" unique_id=1294154213]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Accessory3" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots" unique_id=417119888]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots/Slot_Accessory3" unique_id=1069079766]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot_Accessory4" type="Panel" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots" unique_id=2105929845]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+
+[node name="BG" type="TextureRect" parent="UIManager/UI/CharacterInfo/Margin/Content/Equipments/RightSlots/Slot_Accessory4" unique_id=2008441028]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Attributes" type="ScrollContainer" parent="UIManager/UI/CharacterInfo/Margin/Content" unique_id=1779069077]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 8
+horizontal_scroll_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes" unique_id=374234092]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes/PanelContainer" unique_id=582514026]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="DualColumnLeft" type="GridContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes/PanelContainer/MarginContainer" unique_id=1325068539]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="StatName_" type="RichTextLabel" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes/PanelContainer/MarginContainer/DualColumnLeft" unique_id=493204639]
+visible = false
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AttributeName1"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="DualColumnName" type="GridContainer" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes/PanelContainer/MarginContainer" unique_id=1666155103]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="StatValue_" type="RichTextLabel" parent="UIManager/UI/CharacterInfo/Margin/Content/Attributes/PanelContainer/MarginContainer/DualColumnName" unique_id=1754230506]
+visible = false
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AttributeValue1"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ManualPanel" type="PanelContainer" parent="UIManager/UI" unique_id=1136353737 node_paths=PackedStringArray("SearchLine", "PageLine", "EntryList", "Title", "Description", "PrevPage", "NextPage")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -463.0
+offset_top = -325.5
+offset_right = 463.0
+offset_bottom = 325.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("23_a8up6")
+script = ExtResource("24_e0qyk")
+SearchLine = NodePath("Content/LeftHalf/Search/SearchBar")
+PageLine = NodePath("Content/LeftHalf/PageChanger/Page")
+EntryList = NodePath("Content/LeftHalf/EntryList")
+Title = NodePath("Content/RightHalf/Title")
+Description = NodePath("Content/RightHalf/PanelContainer/Description")
+PrevPage = NodePath("Content/LeftHalf/PageChanger/Prev")
+NextPage = NodePath("Content/LeftHalf/PageChanger/Next")
+
+[node name="Content" type="HBoxContainer" parent="UIManager/UI/ManualPanel" unique_id=1524737535]
+layout_mode = 2
+
+[node name="LeftHalf" type="VBoxContainer" parent="UIManager/UI/ManualPanel/Content" unique_id=672785240]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Search" type="HBoxContainer" parent="UIManager/UI/ManualPanel/Content/LeftHalf" unique_id=1342169519]
+layout_mode = 2
+
+[node name="SearchBar" type="LineEdit" parent="UIManager/UI/ManualPanel/Content/LeftHalf/Search" unique_id=1791526206]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Check" type="Button" parent="UIManager/UI/ManualPanel/Content/LeftHalf/Search" unique_id=865468136]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/icon_max_width = 32
+icon = ExtResource("3_f8o6k")
+icon_alignment = 1
+
+[node name="EntryList" type="VBoxContainer" parent="UIManager/UI/ManualPanel/Content/LeftHalf" unique_id=2085723139]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="PageChanger" type="HBoxContainer" parent="UIManager/UI/ManualPanel/Content/LeftHalf" unique_id=838089309]
+layout_mode = 2
+
+[node name="Prev" type="Button" parent="UIManager/UI/ManualPanel/Content/LeftHalf/PageChanger" unique_id=407278041]
+layout_mode = 2
+size_flags_horizontal = 2
+text = " < "
+
+[node name="Page" type="LineEdit" parent="UIManager/UI/ManualPanel/Content/LeftHalf/PageChanger" unique_id=1295517790]
+layout_mode = 2
+placeholder_text = "- / -"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="Next" type="Button" parent="UIManager/UI/ManualPanel/Content/LeftHalf/PageChanger" unique_id=2042779220]
+layout_mode = 2
+size_flags_horizontal = 10
+text = " > "
+
+[node name="VDividingLine" type="Panel" parent="UIManager/UI/ManualPanel/Content" unique_id=770747316]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_747jk")
+
+[node name="RightHalf" type="VBoxContainer" parent="UIManager/UI/ManualPanel/Content" unique_id=1536356120]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UIManager/UI/ManualPanel/Content/RightHalf" unique_id=944240830]
+layout_mode = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_e0qyk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UIManager/UI/ManualPanel/Content/RightHalf" unique_id=1680809686]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("23_a8up6")
+
+[node name="Description" type="RichTextLabel" parent="UIManager/UI/ManualPanel/Content/RightHalf/PanelContainer" unique_id=1203934269]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="KwPsControl" type="Control" parent="UIManager/UI" unique_id=400499020]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="UIManager/UI/KwPsControl" unique_id=2068777851]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="UIManager/UI" unique_id=2115903374]
+visible = false
+custom_minimum_size = Vector2(640, 480)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("23_a8up6")
+theme_override_constants/side_margin = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8up6")
+current_tab = 3
+all_tabs_in_front = true
+switch_on_drag_hover = false
+
+[node name="Generic" type="ScrollContainer" parent="UIManager/UI/TabContainer" unique_id=567741279]
+visible = false
+layout_mode = 2
+theme = ExtResource("23_a8up6")
+vertical_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI/TabContainer/Generic" unique_id=1598159134]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Display" type="ScrollContainer" parent="UIManager/UI/TabContainer" unique_id=1681804837]
+visible = false
+layout_mode = 2
+theme = ExtResource("23_a8up6")
+vertical_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI/TabContainer/Display" unique_id=1915148099]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sound" type="ScrollContainer" parent="UIManager/UI/TabContainer" unique_id=2143119895]
+visible = false
+layout_mode = 2
+theme = ExtResource("23_a8up6")
+horizontal_scroll_mode = 0
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIManager/UI/TabContainer/Sound" unique_id=34133490]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI/TabContainer/Sound/MarginContainer" unique_id=385859875]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Control" type="MarginContainer" parent="UIManager/UI/TabContainer" unique_id=603000788]
+layout_mode = 2
+theme = ExtResource("23_a8up6")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+metadata/_tab_index = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI/TabContainer/Control" unique_id=155365018]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIManager/UI/TabContainer/Control/VBoxContainer" unique_id=750818386]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="UIManager/UI/TabContainer/Control/VBoxContainer/HBoxContainer" unique_id=1590936426]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Key Name"
+
+[node name="Label2" type="Label" parent="UIManager/UI/TabContainer/Control/VBoxContainer/HBoxContainer" unique_id=1260532185]
+layout_mode = 2
+text = "Key Name"
+
+[node name="Panel" type="Panel" parent="UIManager/UI/TabContainer/Control/VBoxContainer" unique_id=501709057]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dxo86")
+
+[node name="Scroll" type="ScrollContainer" parent="UIManager/UI/TabContainer/Control/VBoxContainer" unique_id=1344352044]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI/TabContainer/Control/VBoxContainer/Scroll" unique_id=395167466]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIManager/UI/TabContainer/Control/VBoxContainer/Scroll/VBoxContainer" unique_id=1978697439]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UIManager/UI/TabContainer/Control/VBoxContainer/Scroll/VBoxContainer/HBoxContainer" unique_id=1161009444]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nb11o")
+
+[node name="Label" type="Label" parent="UIManager/UI/TabContainer/Control/VBoxContainer/Scroll/VBoxContainer/HBoxContainer/PanelContainer" unique_id=102269127]
+layout_mode = 2
+text = "1235423562346"
+
+[node name="Button1" type="Button" parent="UIManager/UI/TabContainer/Control/VBoxContainer/Scroll/VBoxContainer/HBoxContainer" unique_id=1669777021]
+custom_minimum_size = Vector2(48, 32)
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_xcy2v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dxo86")
+text = "→"
+
+[node name="Debug" type="RichTextLabel" parent="UIManager/UI" unique_id=725890974]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = 5.0
+offset_right = -16.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "Debug infomation"
+vertical_alignment = 2
+
+[node name="GridContainer" type="GridContainer" parent="UIManager/UI" unique_id=88307406]
+visible = false
+offset_right = 800.0
+offset_bottom = 800.0
+
+[node name="UIProgressBar" type="NinePatchRect" parent="UIManager/UI" unique_id=103700340 node_paths=PackedStringArray("_fills")]
+offset_left = 282.0
+offset_top = 45.0
+offset_right = 820.0
+offset_bottom = 85.0
+texture = ExtResource("16_ccmul")
+script = ExtResource("27_730o7")
+_fills = [NodePath("UIProgressFill")]
+metadata/_custom_type_script = "uid://rxon3l2qao2t"
+
+[node name="UIProgressFill" type="NinePatchRect" parent="UIManager/UI/UIProgressBar" unique_id=933971886]
+material = SubResource("ShaderMaterial_cma7p")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_cun2r")
+script = ExtResource("26_nqgrc")
+metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
+
+[node name="SkillBar" type="GridContainer" parent="UIManager/UI" unique_id=698961570]
+offset_left = 723.0
+offset_top = 691.0
+offset_right = 851.0
+offset_bottom = 819.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="SkillIcon0" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=1191072794]
+material = SubResource("ShaderMaterial_usbst")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("31_hlqjr")
+expand_mode = 1
+
+[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon0" unique_id=1667097028]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
+
+[node name="Label" type="Label" parent="UIManager/UI/SkillBar/SkillIcon0" unique_id=337161624]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 15.0
+offset_right = 62.0
+offset_bottom = 49.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "130"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillIcon1" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=2002881306]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("29_cma7p")
+expand_mode = 1
+
+[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon1" unique_id=1079215596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
+
+[node name="SkillIcon2" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=720258061]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("29_cma7p")
+expand_mode = 1
+
+[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon2" unique_id=467993376]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
+
+[node name="SkillIcon3" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=1120255907]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("29_cma7p")
+expand_mode = 1
+
+[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon3" unique_id=1556038847]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
+
+[node name="InputManager" type="Node" parent="." unique_id=526775808]
+script = ExtResource("1_guoxd")

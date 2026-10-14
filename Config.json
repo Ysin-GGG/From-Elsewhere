@@ -1,0 +1,58 @@
+// This is the config file for game.
+// If you want to edit this file, please make sure to follow the JSON format and the comments for each option.
+// Any invalid value will be automatically initialize config to default when loading.
+{
+  "LeftStickDeadzone": {
+    "Left": 0.25,
+    "Up": 0.25,
+    "Right": 0.25,
+    "Down": 0.25
+  },
+  "RightStickDeadzone": {
+    "Left": 0.25,
+    "Up": 0.25,
+    "Right": 0.25,
+    "Down": 0.25
+  },
+  "TriggerDeadzone": {
+    "Left": 0.25,
+    "Right": 0.25
+  },
+  "Volume": {
+    "Music": 1.0,
+    "SFX": 1.0,
+    "Ambient": 1.0,
+    "Master": 0.5
+  },
+  "DoubleClickDelay": 15,
+  "VSync": true,
+  "MuteOnUnfocused": true,
+  "DisplayMode": 2,
+  "FPSLimit": -1,
+  "Language": "zh-Hans",
+  "GameKey": {
+    "Up": [ 64, -1, 101, -1 ],
+    "Down": [ 65, -1, 102, -1 ],
+    "Left": [ 66, -1, 103, -1 ],
+    "Right": [ 67, -1, 104, -1 ],
+    "WeaponAttack1": [ 25, -1, 118, -1 ],
+    "WeaponAttack2": [ 23, -1, 116, -1 ],
+    "WeaponAction": [ 2, -1, 122, -1 ],
+    "Interact": [ 5, -1, 115, -1 ],
+    "ActiveSkill1": [ 0, -1, 113, -1 ],
+    "ActiveSkill2": [ 18, -1, 111, -1 ],
+    "ActiveSkill3": [ 3, -1, 114, -1 ],
+    "ActiveSkill4": [ 21, -1, 112, -1 ],
+    "QuickProp1": [ 16, -1, 108, -1 ],
+    "QuickProp2": [ 22, -1, 106, -1 ],
+    "QuickProp3": [ 4, -1, 109, -1 ],
+    "QuickProp4": [ 17, -1, 107, -1 ],
+    "QuickPropWheel": [ 72, -1, 105, -1 ],
+    "ActiveSkillWheel": [ 68, -1, 110, -1 ],
+    "Inventory": [ 8, -1, 117, -1 ],
+    "Character": [ 20, -1, 120, -1 ],
+    "Quest": [ 14, -1, 119, -1 ],
+    "Map": [ 12, -1, 128, -1 ],
+    "Menu": [ 75, -1, 129, -1 ]
+  }
+}

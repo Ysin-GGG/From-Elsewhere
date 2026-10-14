@@ -1,0 +1,177 @@
+{
+	"Critical": {
+		"Meta": "[url=Keyword.Critical]{$Keyword.Critical.Name}[/url]",
+		"Name": "会心",
+		"Description": "会心效果会以百分比的形式对单次伤害进行修正（通常是正收益），可通过伤害文字的样式变化来观察是否有造成会心效果。\n\n默认情况下，只能通过造成{$Keyword.DirectDamage.Meta}来触发会心效果。"
+	},
+	"Normal": {
+		"Meta": "[url=Keyword.Normal]{$Keyword.Normal.Name}[/url]",
+		"Name": "普通攻击",
+		"Description": "普通攻击通常指不消耗气力值的攻击动作；\n包括通过攻击键执行的攻击，以及仅消耗气力的攻击；\n对于非玩家单位而言，不会执行演出暂停的攻击均为普通攻击。\n\n普通攻击和特殊攻击的标签不会同时存在。"
+	},
+	"Special": {
+		"Meta": "[url=Keyword.Special]{$Keyword.Special.Name}[/url]",
+		"Name": "特殊攻击",
+		"Description": "特殊攻击通常指会消耗气力值的攻击动作；\n包括通过技能键执行的攻击，或是消耗气力槽的攻击；\n对于非玩家单位而言，会执行演出暂停的攻击均为特殊攻击。\n\n普通攻击和特殊攻击的标签不会同时存在。\n\n若非特殊说明，对于技能衍生出的召唤单位，其所有攻击也均视为特殊攻击。"
+	},
+	"DirectDamage": {
+		"Meta": "[url=Keyword.DirectDamage]{$Keyword.DirectDamage.Name}[/url]",
+		"Name": "{$Keyword.Direct.Name}伤害",
+		"Description": "{$Keyword.DirectDamage.Name}通常由武器攻击、召唤物攻击或投射物引发；\n{$Keyword.DirectDamage.Name}能够造成硬直，且可以通过闪避效果规避伤害。\n\n所有非{$Keyword.Indirect.Name}攻击的类型均为{$Keyword.Direct.Name}攻击。"
+	},
+	"IndirectDamage": {
+		"Meta": "[url=Keyword.IndirectDamage]{$Keyword.IndirectDamage.Name}[/url]",
+		"Name": "{$Keyword.Indirect.Name}伤害",
+		"Description": "{$Keyword.IndirectDamage.Name}通常由环境、元素异常或减益效果引发；\n{$Keyword.IndirectDamage.Name}不会造成硬直，但无法通过闪避效果规避伤害。\n\n所有非{$Keyword.Direct.Name}攻击的类型均为{$Keyword.Indirect.Name}攻击。"
+	},
+	"PhysicalDamage": {
+		"Meta": "[url=Keyword.Physical]{$Keyword.PhysicalDamage.Name}[/url]",
+		"Name": "{$Keyword.Physical.Name}伤害",
+		"Description": ""
+	},
+	"ElementalDamage": {
+		"Meta": "[url=Keyword.ElementalDamage]{$Keyword.ElementalDamage.Name}[/url]",
+		"Name": "{$Keyword.Elemental.Name}伤害",
+		"Description": ""
+	},
+	"SlashDamage": {
+		"Meta": "[url=Keyword.SlashDamage]{$Keyword.SlashDamage.Name}[/url]",
+		"Name": "切割伤害",
+		"Description": ""
+	},
+	"BluntDamage": {
+		"Meta": "[url=Keyword.BluntDamage]{$Keyword.BluntDamage.Name}[/url]",
+		"Name": "打击伤害",
+		"Description": ""
+	},
+	"PierceDamage": {
+		"Meta": "[url=Keyword.PierceDamage]{$Keyword.PierceDamage.Name}[/url]",
+		"Name": "穿刺伤害",
+		"Description": ""
+	},
+	"SpellDamage": {
+		"Meta": "[url=Keyword.SpellDamage]{$Keyword.SpellDamage.Name}[/url]",
+		"Name": "法术伤害",
+		"Description": ""
+	},
+	"Thermo": {
+		"Meta": "[url=Keyword.Thermo]{$Keyword.Thermo.Name}[/url]",
+		"Name": "火元素",
+		"Description": ""
+	},
+	"Hydro": {
+		"Meta": "[url=Keyword.Hydro]{$Keyword.Hydro.Name}[/url]",
+		"Name": "水元素",
+		"Description": ""
+	},
+	"Cyro": {
+		"Meta": "[url=Keyword.Cyro]{$Keyword.Cyro.Name}[/url]",
+		"Name": "冰元素",
+		"Description": ""
+	},
+	"Bronto": {
+		"Meta": "[url=Keyword.Bronto]{$Keyword.Bronto.Name}[/url]",
+		"Name": "雷元素",
+		"Description": ""
+	},
+	"Aero": {
+		"Meta": "[url=Keyword.Aero]{$Keyword.Aero.Name}[/url]",
+		"Name": "风元素",
+		"Description": ""
+	},
+	"Petro": {
+		"Meta": "[url=Keyword.Petro]{$Keyword.Petro.Name}[/url]",
+		"Name": "岩元素",
+		"Description": ""
+	},
+	"Threat": {
+		"Meta": "[url=Keyword.Threat]{$Keyword.Threat.Name}[/url]",
+		"Name": "异常",
+		"Description": "异常是造成伤害引起的一系列负面影响，分为{$Keyword.PhysicalThreat.Meta}和{$Keyword.ElementalThreat.Meta}两种；\n所有异常既不属于增益也不属于减益。\n\n对于头目类敌人，异常对其造成的伤害及可变动的影响会减半"
+	},
+	"PhysicalThreat": {
+		"Meta": "[url=Keyword.PhysicalThreat]{$Keyword.PhysicalThreat.Name}[/url]",
+		"Name": "物理异常",
+		"Description": ""
+	},
+	"PhysicalThreatLevel": {
+		"Meta": "[url=Keyword.PhysicalThreatLevel]{$Keyword.PhysicalThreatLevel.Name}[/url]",
+		"Name": "物理异常值",
+		"Description": ""
+	},
+	"PhysicalThreatEffect": {
+		"Meta": "[url=Keyword.PhysicalThreatEffect]{$Keyword.PhysicalThreatEffect.Name}[/url]",
+		"Name": "物理异常效果",
+		"Description": ""
+	},
+	"PhysicalThreatStatus": {
+		"Meta": "[url=Keyword.PhysicalThreatStatus]{$Keyword.PhysicalThreatStatus.Name}[/url]",
+		"Name": "物理异常状态",
+		"Description": ""
+	},
+	"ElementalThreat": {
+		"Meta": "[url=Keyword.ElementalThreat]{$Keyword.ElementalThreat.Name}[/url]",
+		"Name": "元素异常",
+		"Description": "元素异常是受到{$Keyword.ElementalDamage.Meta}时所产生的一系列影响，影响分为{$Keyword.ElementalThreatEffect.Meta}和{$Keyword.ElementalThreatStatus.Meta}两种。\n\n通过直接元素伤害造成对应元素的异常值积累，从而引起对应的元素异常效果；\n每种元素异常值的计算互相独立。"
+	},
+	"ElementalThreatLevel": {
+		"Meta": "[url=Keyword.ElementalThreatLevel]{$Keyword.ElementalThreatLevel.Name}[/url]",
+		"Name": "元素侵染",
+		"Description": "{$Keyword.ElementalThreatLevel.Name}是一种用于所受元素伤害的量值，其大小会影响目标实体所受到的元素异常相关机制。\n\n目标实体受到[url=Keyword.DirectDamage]{$Keyword.Direct.Name}[/url]{$Keyword.Elemental.Meta}伤害时，会导致其受到{$Keyword.ElementalThreatLevel.Name}，其本次所受元素伤害的10%积累为{$Keyword.ElementalThreatLevel.Name}值；\n实体身上的{$Keyword.ElementalThreatLevel.Name}值以每秒3%当前值的速度流失；\n无敌状态下的实体不会流失{$Keyword.ElementalThreatLevel.Name}值。"
+	},
+	"ElementalThreatEffect": {
+		"Meta": "[url=Keyword.ElementalThreatEffect]{$Keyword.ElementalThreatEffect.Name}[/url]",
+		"Name": "元素效应",
+		"Description": "{$Keyword.ElementalThreatEffect.Name}是一种持续型的负面影响，但不属于负面异常效果。\n\n当对应的{$Keyword.ElementalThreatLevel.Meta}值达到门槛时，对应的{$Keyword.ElementalThreatEffect.Name}效果会持续生效；\n{$Keyword.ElementalThreatLevel.Name}门槛初始为实体自身最大生命值的5%，当{$Keyword.ElementalThreatLevel.Name}值低于门槛时，对应的{$Keyword.ElementalThreatEffect.Name}即刻失效。\n\n{$Keyword.ElementalThreatEffect.Name}的影响程度均会根据对应的{$Keyword.ElementalThreatLevel.Name}值的大小而改变。"
+	},
+	"ElementalThreatStatus": {
+		"Meta": "[url=Keyword.ElementalThreatStatus]{$Keyword.ElementalThreatStatus.Name}[/url]",
+		"Name": "元素过载",
+		"Description": "{$Keyword.ElementalThreatStatus.Name}是一种瞬间型的负面影响，但不属于负面异常效果。\n\n在{$Keyword.ElementalThreatEffect.Meta}生效的基础上，受到对应的{$Keyword.ElementalThreatLevel.Meta}时，即有概率触发{$Keyword.ElementalThreatStatus.Name}；\n目标实体对应的{$Keyword.ElementalThreatLevel.Name}值越大，触发对应的{$Keyword.ElementalThreatStatus.Name}概率越高。\n\n{$Keyword.ElementalThreatEffect.Name}的影响程度均会根据对应的{$Keyword.ElementalThreatLevel.Name}值的大小而改变。"
+	},
+	"SuperCancel": {
+		"Meta": "[url=Keyword.SuperCancel]{$Keyword.SuperCancel.Name}[/url]",
+		"Name": "超级取消",
+		"Description": "通过{$Keyword.ExtinctionArt.Meta}衔接技能以触发超级取消。\n\n欲触发超级取消，需要额外消耗1格炼气；\n由超级取消派生的技能，造成的伤害提高15%。"
+	},
+	"DreamCancel": {
+		"Meta": "[url=Keyword.DreamCancel]{$Keyword.DreamCancel.Name}[/url]",
+		"Name": "梦幻取消",
+		"Description": "通过技能再衔接技能以触发梦幻取消。\n\n欲触发梦幻取消，需要额外消耗1格炼气；\n由梦幻取消派生的技能，造成的伤害提高35%。"
+	},
+	"Regeneration": {
+		"Meta": "[url=Keyword.Regeneration]{$Keyword.Regeneration.Name}[/url]",
+		"Name": "再生",
+		"Description": "持续间歇性地恢复对应属性值。\n\n基础再生间隔为1秒。"
+	},
+	"Direct": {
+		"Meta": "[url=Keyword.Direct]{$Keyword.Direct.Name}[/url]",
+		"Name": "直接",
+		"Description": "{$Keyword.DirectDamage.Description}",
+		"IgnoreManual": ""
+	},
+	"Indirect": {
+		"Meta": "[url=Keyword.Indirect]{$Keyword.Indirect.Name}[/url]",
+		"Name": "间接",
+		"Description": "{$Keyword.IndirectDamage.Description}",
+		"IgnoreManual": ""
+	},
+	"Physical": {
+		"Meta": "[url=Keyword.PhysicalDamage]{$Keyword.Physical.Name}[/url]",
+		"Name": "物理",
+		"Description": "{$Keyword.PhysicalDamage.Description}",
+		"IgnoreManual": ""
+	},
+	"Elemental": {
+		"Meta": "[url=Keyword.ElementalDamage]{$Keyword.Elemental.Name}[/url]",
+		"Name": "元素",
+		"Description": "{$Keyword.ElementalDamage.Description}",
+		"IgnoreManual": ""
+	},
+	"Unknown": {
+		"Meta": "[s]{$Keyword.Unknown.Name}[/s]",
+		"Name": "未知关键词名称",
+		"Description": "[s]未知关键词描述[/s]",
+		"IgnoreManual": ""
+	}
+}
