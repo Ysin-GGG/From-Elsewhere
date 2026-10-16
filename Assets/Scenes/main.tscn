@@ -973,16 +973,15 @@ StaminaBar = NodePath("StaminaBar")
 SwordBreezeBar = NodePath("SwordBreezeBar")
 metadata/_custom_type_script = "uid://cn7tpob1r6uq5"
 
-[node name="LifeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1070678292 node_paths=PackedStringArray("_fills")]
+[node name="LifeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1070678292]
 custom_minimum_size = Vector2(480, 24)
 layout_mode = 2
 texture = ExtResource("16_ccmul")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("27_730o7")
-_fills = []
 metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
 [node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/LifeBar" unique_id=19071022]
@@ -995,23 +994,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_cun2r")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("26_nqgrc")
 metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="ManaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1086160157 node_paths=PackedStringArray("_fills")]
+[node name="ManaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1086160157]
 custom_minimum_size = Vector2(450, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("16_ccmul")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("27_730o7")
-_fills = []
 metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
 [node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/ManaBar" unique_id=1842333153]
@@ -1024,23 +1022,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_cun2r")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("26_nqgrc")
 metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="StaminaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1193426228 node_paths=PackedStringArray("_fills")]
+[node name="StaminaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1193426228]
 custom_minimum_size = Vector2(420, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("16_ccmul")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("27_730o7")
-_fills = []
 metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
 [node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/StaminaBar" unique_id=1085363571]
@@ -1053,23 +1050,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_cun2r")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("26_nqgrc")
 metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="SwordBreezeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=103700340 node_paths=PackedStringArray("_fills")]
+[node name="SwordBreezeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=103700340]
 custom_minimum_size = Vector2(240, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("16_ccmul")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 8
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("27_730o7")
-_fills = []
 metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
 [node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/SwordBreezeBar" unique_id=933971886]
@@ -1082,9 +1078,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_cun2r")
 patch_margin_left = 8
-patch_margin_top = 4
-patch_margin_right = 24
-patch_margin_bottom = 4
+patch_margin_top = 2
+patch_margin_right = 20
+patch_margin_bottom = 2
 script = ExtResource("26_nqgrc")
 metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 

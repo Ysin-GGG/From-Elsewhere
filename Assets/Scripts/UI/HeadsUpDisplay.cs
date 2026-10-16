@@ -29,13 +29,16 @@ namespace LOI.UI
         [Export] protected UIProgressBar ManaBar { get; private set; }
         [Export] protected UIProgressBar StaminaBar { get; private set; }
         [Export] protected UIProgressBar SwordBreezeBar { get; private set; }
+        private UIProgressBar[] Bars = new UIProgressBar[4];
 
         public override void _Ready()
         {
-            this.LifeBar = UIManager.Instantiate(nameof(this.LifeBar), this.LifeBar, this);
-            this.ManaBar = UIManager.Instantiate(nameof(this.ManaBar), this.ManaBar, this);
-            this.StaminaBar = UIManager.Instantiate(nameof(this.StaminaBar), this.StaminaBar, this);
-            this.SwordBreezeBar = UIManager.Instantiate(nameof(this.SwordBreezeBar), this.SwordBreezeBar, this);
+            this.Bars[0] = this.LifeBar = UIManager.Instantiate(nameof(this.LifeBar), this.LifeBar, this);
+            this.Bars[1] = this.ManaBar = UIManager.Instantiate(nameof(this.ManaBar), this.ManaBar, this);
+            this.Bars[2] = this.StaminaBar = UIManager.Instantiate(nameof(this.StaminaBar), this.StaminaBar, this);
+            this.Bars[3] = this.SwordBreezeBar = UIManager.Instantiate(nameof(this.SwordBreezeBar), this.SwordBreezeBar, this);
+            foreach (var bar in this.Bars)
+                bar.Margin = new Vector4I(8, 2, 20, 2);
         }
 
         public void BindTo(Character character)

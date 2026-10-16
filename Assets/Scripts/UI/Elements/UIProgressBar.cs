@@ -18,9 +18,6 @@ namespace LOI.UI.Elements
         [Export]
         private RichTextLabel Label;
 
-        [Export]
-        private Array<UIProgressFill> _fills;
-
         public UIProgressFill this[int index]
         {
             get => this.fills[index];
@@ -43,16 +40,10 @@ namespace LOI.UI.Elements
 
         public UIProgressBar()
         {
-            if (this._fills.NotNull())
-                foreach (UIProgressFill fill in this._fills)
-                    this.AddProgressFill(fill);
         }
 
         public override void _Ready()
         {
-            if (this._fills.NotNull())
-                foreach (UIProgressFill fill in this._fills)
-                    this.AddProgressFill(fill);
             foreach (Node node in this.GetChildren())
                 if (node is UIProgressFill fill)
                     this.AddProgressFill(fill);
