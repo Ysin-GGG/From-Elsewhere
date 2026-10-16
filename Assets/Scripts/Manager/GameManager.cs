@@ -83,7 +83,6 @@ namespace LOI.Manager
             enemy.Life = 3000000;
 
             Options.Initialization();
-            //GameManager.LocalCharacter.Init();
         }
 
         protected override void EnterTree()

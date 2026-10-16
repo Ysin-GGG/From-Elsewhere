@@ -11,5 +11,6 @@ namespace LOI.States
         public int ManaCost { get; }
         public int Cooldown { get; }
 
+        public State GetInstance() => this;
     }
 }

@@ -48,8 +48,6 @@ namespace LOI.States
                     CanBeParried = false,
                     HitFlag = HitFlag.SCA,
                 };
-                Character character = entity as Character;
-                if(character.Blade_SwordBreezeMax < 4000) character.Init();
                 hitDef.OnHit = (self, target) =>
                 {
                     self.TargetCatch.Add(target);

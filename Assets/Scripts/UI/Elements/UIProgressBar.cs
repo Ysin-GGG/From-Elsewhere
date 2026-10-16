@@ -50,6 +50,9 @@ namespace LOI.UI.Elements
 
         public override void _Ready()
         {
+            if (this._fills.NotNull())
+                foreach (UIProgressFill fill in this._fills)
+                    this.AddProgressFill(fill);
             foreach (Node node in this.GetChildren())
                 if (node is UIProgressFill fill)
                     this.AddProgressFill(fill);
@@ -59,15 +62,20 @@ namespace LOI.UI.Elements
 
         public int AddProgressFill(UIProgressFill fill)
         {
-            int idx = this.fills.Count;
-            this.fills.Add(fill);
-            fill.Bar = this;
-            fill.Reparent(this);
-            fill.Size = this.Size;
-            fill.PatchMarginLeft = this.PatchMarginLeft;
-            fill.PatchMarginTop = this.PatchMarginTop;
-            fill.PatchMarginRight = this.PatchMarginRight;
-            fill.PatchMarginBottom = this.PatchMarginBottom;
+            int idx = this.fills.IndexOf(fill);
+            if (idx < 0)
+            {
+                this.fills.Add(fill);
+                idx = this.fills.Count;
+                fill.Bar = this;
+                fill.Reparent(this);
+                fill.Name = "Fill_" + idx;
+                fill.Size = this.Size;
+                fill.PatchMarginLeft = this.PatchMarginLeft;
+                fill.PatchMarginTop = this.PatchMarginTop;
+                fill.PatchMarginRight = this.PatchMarginRight;
+                fill.PatchMarginBottom = this.PatchMarginBottom;
+            }
             return idx;
         }
     }

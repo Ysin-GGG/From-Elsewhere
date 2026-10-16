@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bhfjm1eyt7x0r" path="res://Assets/Images/HUD/StatFill.png" id="17_cun2r"]
 [ext_resource type="Texture2D" uid="uid://upbgeiu0hbxp" path="res://Assets/Images/Loot/Loot.png" id="17_dxo86"]
 [ext_resource type="Texture2D" uid="uid://cm8su4fjrhlvm" path="res://Assets/Images/Sword.png" id="19_qvima"]
+[ext_resource type="Script" uid="uid://cn7tpob1r6uq5" path="res://Assets/Scripts/UI/HeadsUpDisplay.cs" id="21_uh3ed"]
 [ext_resource type="Texture2D" uid="uid://2cpoxe7oaeb6" path="res://Assets/Images/Pixel.png" id="21_xcy2v"]
 [ext_resource type="Theme" uid="uid://dbp8efhcgdg1x" path="res://Assets/Themes/UI1.tres" id="23_a8up6"]
 [ext_resource type="Script" uid="uid://ccve5wvkuydv1" path="res://Assets/Scripts/UI/ManualPanel.cs" id="24_e0qyk"]
@@ -288,45 +289,25 @@ normal = Vector2(-1, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccmul"]
 size = Vector2(320, 20)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nb11o"]
-texture = ExtResource("16_ccmul")
-texture_margin_left = 16.0
-texture_margin_top = 8.0
-texture_margin_right = 32.0
-texture_margin_bottom = 8.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uh3ed"]
+shader = ExtResource("27_shq5y")
+shader_parameter/Color = Color(1, 0.24705882, 0.24705882, 1)
+shader_parameter/Value = 0.5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xcy2v"]
-texture = ExtResource("17_cun2r")
-texture_margin_left = 16.0
-texture_margin_top = 8.0
-texture_margin_right = 32.0
-texture_margin_bottom = 8.0
-modulate_color = Color(1, 0, 0.24705882, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlqjr"]
+shader = ExtResource("27_shq5y")
+shader_parameter/Color = Color(0.24705882, 0.24705882, 1, 1)
+shader_parameter/Value = 0.5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ccmul"]
-texture = ExtResource("17_cun2r")
-texture_margin_left = 16.0
-texture_margin_top = 8.0
-texture_margin_right = 32.0
-texture_margin_bottom = 8.0
-modulate_color = Color(0, 0.2509804, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2vhu"]
+shader = ExtResource("27_shq5y")
+shader_parameter/Color = Color(1, 0.7490196, 0.24705882, 1)
+shader_parameter/Value = 0.5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cun2r"]
-texture = ExtResource("17_cun2r")
-texture_margin_left = 16.0
-texture_margin_top = 8.0
-texture_margin_right = 32.0
-texture_margin_bottom = 8.0
-modulate_color = Color(1, 0.7490196, 0.24705882, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttgh6"]
-bg_color = Color(1, 0.12156863, 0.12156863, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qkp8"]
-bg_color = Color(0.12156863, 0.12156863, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uq7jr"]
-bg_color = Color(0.8, 0.8, 0.8, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cma7p"]
+shader = ExtResource("27_shq5y")
+shader_parameter/Color = Color(0.24705882, 1, 1, 1)
+shader_parameter/Value = 0.5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uop3n"]
 
@@ -347,11 +328,6 @@ bg_color = Color(1, 0.6, 0.6, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcy2v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxo86"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cma7p"]
-shader = ExtResource("27_shq5y")
-shader_parameter/Color = Color(0.24705882, 1, 1, 1)
-shader_parameter/Value = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_usbst"]
 shader = ExtResource("29_qvima")
@@ -965,7 +941,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("19_qvima")
 offset = Vector2(0, -320)
 
-[node name="UIManager" type="Node" parent="." unique_id=1100632328 node_paths=PackedStringArray("DebugInfo", "_CharacterInfo", "_Sliders", "_Options", "KwPsControl", "CbTsControl", "_SwordBreezeBar", "_ScreenCanvas")]
+[node name="UIManager" type="Node" parent="." unique_id=1100632328 node_paths=PackedStringArray("DebugInfo", "_CharacterInfo", "_Sliders", "_Options", "KwPsControl", "CbTsControl", "_ScreenCanvas")]
 script = ExtResource("7_4357x")
 DebugInfo = NodePath("UI/Debug")
 _CharacterInfo = NodePath("UI/CharacterInfo")
@@ -973,7 +949,6 @@ _Sliders = NodePath("UI/TabContainer/Sound/MarginContainer/VBoxContainer")
 _Options = NodePath("UI/TabContainer")
 KwPsControl = NodePath("UI/KwPsControl")
 CbTsControl = NodePath("CbTsControl")
-_SwordBreezeBar = NodePath("UI/UIProgressBar")
 _ScreenCanvas = NodePath("UI")
 
 [node name="CbTsControl" type="Control" parent="UIManager" unique_id=1582384924]
@@ -987,159 +962,131 @@ mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="UIManager" unique_id=611353537]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/UI" unique_id=1055246598]
-offset_left = 3.0
-offset_top = 155.0
-offset_right = 483.0
-offset_bottom = 195.0
-theme_override_constants/separation = -7
+[node name="HeadsUpDisplay" type="VBoxContainer" parent="UIManager/UI" unique_id=651128262 node_paths=PackedStringArray("LifeBar", "ManaBar", "StaminaBar", "SwordBreezeBar")]
+custom_minimum_size = Vector2(0, 80)
+offset_right = 480.0
+offset_bottom = 108.0
+script = ExtResource("21_uh3ed")
+LifeBar = NodePath("LifeBar")
+ManaBar = NodePath("ManaBar")
+StaminaBar = NodePath("StaminaBar")
+SwordBreezeBar = NodePath("SwordBreezeBar")
+metadata/_custom_type_script = "uid://cn7tpob1r6uq5"
 
-[node name="Life" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=1487808486]
+[node name="LifeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1070678292 node_paths=PackedStringArray("_fills")]
 custom_minimum_size = Vector2(480, 24)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+texture = ExtResource("16_ccmul")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("27_730o7")
+_fills = []
+metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
-[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Life" unique_id=1426987369]
+[node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/LifeBar" unique_id=19071022]
+material = SubResource("ShaderMaterial_uh3ed")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_xcy2v")
+texture = ExtResource("17_cun2r")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("26_nqgrc")
+metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="Mana" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=819411058]
-custom_minimum_size = Vector2(440, 24)
+[node name="ManaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1086160157 node_paths=PackedStringArray("_fills")]
+custom_minimum_size = Vector2(450, 24)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+texture = ExtResource("16_ccmul")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("27_730o7")
+_fills = []
+metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
-[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Mana" unique_id=760082057]
+[node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/ManaBar" unique_id=1842333153]
+material = SubResource("ShaderMaterial_hlqjr")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ccmul")
+texture = ExtResource("17_cun2r")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("26_nqgrc")
+metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="Mana2" type="Panel" parent="UIManager/UI/VBoxContainer" unique_id=1387135626]
-custom_minimum_size = Vector2(400, 24)
+[node name="StaminaBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1193426228 node_paths=PackedStringArray("_fills")]
+custom_minimum_size = Vector2(420, 24)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_nb11o")
+texture = ExtResource("16_ccmul")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("27_730o7")
+_fills = []
+metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
-[node name="Panel" type="Panel" parent="UIManager/UI/VBoxContainer/Mana2" unique_id=993768279]
+[node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/StaminaBar" unique_id=1085363571]
+material = SubResource("ShaderMaterial_l2vhu")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_cun2r")
+texture = ExtResource("17_cun2r")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("26_nqgrc")
+metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
-[node name="HeadUpDisplay" type="VBoxContainer" parent="UIManager/UI" unique_id=2021566753]
-offset_right = 256.0
-offset_bottom = 80.0
-
-[node name="Layer1" type="HBoxContainer" parent="UIManager/UI/HeadUpDisplay" unique_id=108799063]
+[node name="SwordBreezeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=103700340 node_paths=PackedStringArray("_fills")]
+custom_minimum_size = Vector2(240, 24)
 layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("16_ccmul")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 8
+script = ExtResource("27_730o7")
+_fills = []
+metadata/_custom_type_script = "uid://rxon3l2qao2t"
 
-[node name="Avatar" type="TextureRect" parent="UIManager/UI/HeadUpDisplay/Layer1" unique_id=541401646]
-layout_mode = 2
-texture = ExtResource("3_f8o6k")
-expand_mode = 2
-
-[node name="LifeMana" type="VBoxContainer" parent="UIManager/UI/HeadUpDisplay/Layer1" unique_id=746004242]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="LifeBar" type="Panel" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana" unique_id=2003784321]
-clip_contents = true
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-
-[node name="LifeValue" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/LifeBar" unique_id=692272555]
+[node name="Fill1" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay/SwordBreezeBar" unique_id=933971886]
+material = SubResource("ShaderMaterial_cma7p")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset_ratio = Vector2(0, 0.5)
-theme_override_styles/panel = SubResource("StyleBoxFlat_ttgh6")
-
-[node name="Label" type="Label" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/LifeBar" unique_id=1086766087]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "Life: 3000/3000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ManaBar" type="Panel" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana" unique_id=2144343813]
-clip_contents = true
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-
-[node name="ManaValue" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/ManaBar" unique_id=491301701]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0, 0.5)
-theme_override_styles/panel = SubResource("StyleBoxFlat_4qkp8")
-
-[node name="Label" type="Label" parent="UIManager/UI/HeadUpDisplay/Layer1/LifeMana/ManaBar" unique_id=945990439]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-text = "Mana: 3000/3000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpiritBar" type="PanelContainer" parent="UIManager/UI/HeadUpDisplay" unique_id=300974767]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_uq7jr")
-
-[node name="Margin" type="MarginContainer" parent="UIManager/UI/HeadUpDisplay/SpiritBar" unique_id=422317835]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="Count" type="GridContainer" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin" unique_id=1556753980]
-layout_mode = 2
-theme_override_constants/h_separation = 4
-columns = 3
-
-[node name="Spirit" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=885388392]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Spirit2" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=1023424083]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Spirit3" type="Panel" parent="UIManager/UI/HeadUpDisplay/SpiritBar/Margin/Count" unique_id=1594846091]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+texture = ExtResource("17_cun2r")
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 24
+patch_margin_bottom = 4
+script = ExtResource("26_nqgrc")
+metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
 [node name="CharacterInfo" type="PanelContainer" parent="UIManager/UI" unique_id=1603761287 node_paths=PackedStringArray("DualColumnLeft", "DualColumnRight")]
 visible = false
@@ -1615,10 +1562,6 @@ text = "→"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = 5.0
-offset_right = -16.0
-offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -1629,28 +1572,6 @@ vertical_alignment = 2
 visible = false
 offset_right = 800.0
 offset_bottom = 800.0
-
-[node name="UIProgressBar" type="NinePatchRect" parent="UIManager/UI" unique_id=103700340 node_paths=PackedStringArray("_fills")]
-offset_left = 282.0
-offset_top = 45.0
-offset_right = 820.0
-offset_bottom = 85.0
-texture = ExtResource("16_ccmul")
-script = ExtResource("27_730o7")
-_fills = [NodePath("UIProgressFill")]
-metadata/_custom_type_script = "uid://rxon3l2qao2t"
-
-[node name="UIProgressFill" type="NinePatchRect" parent="UIManager/UI/UIProgressBar" unique_id=933971886]
-material = SubResource("ShaderMaterial_cma7p")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("17_cun2r")
-script = ExtResource("26_nqgrc")
-metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
 
 [node name="SkillBar" type="GridContainer" parent="UIManager/UI" unique_id=698961570]
 offset_left = 723.0

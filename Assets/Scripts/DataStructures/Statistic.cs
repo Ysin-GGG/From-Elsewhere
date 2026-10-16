@@ -337,7 +337,6 @@ namespace LOI.DataStructures
             return str;
         }
 
-
         public IEnumerator<Factor<T>> GetEnumerator() => this.modifiers.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => this.modifiers.GetEnumerator();
     }

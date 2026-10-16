@@ -24,45 +24,34 @@ namespace LOI.Manager
 
         public static CharacterInfo CharacterInfo => UIManager.Instance._CharacterInfo;
 
-        public static Color SwordBreezeBar_Color { get => UIManager.Instance._SwordBreezeBar[0].Color; set => UIManager.Instance._SwordBreezeBar[0].Color = value; }
-        public static double SwordBreezeBar_Value { get => UIManager.Instance._SwordBreezeBar[0].Value; set => UIManager.Instance._SwordBreezeBar[0].Value = value; }
+        public static Color SwordBreezeBar_Color { get => UIManager.Instance.HeadsUpDisplay?.SwordBreezeBar_Color ?? new Color(); set { if (UIManager.Instance.HeadsUpDisplay.NotNull()) UIManager.Instance.HeadsUpDisplay.SwordBreezeBar_Color = value; } }
+        public static double SwordBreezeBar_Value { get => UIManager.Instance.HeadsUpDisplay?.SwordBreeze ?? 0; set { if (UIManager.Instance.HeadsUpDisplay.NotNull()) UIManager.Instance.HeadsUpDisplay.SwordBreeze = value; } }
 
-        [Export]
-        private RichTextLabel DebugInfo;
+        public static HeadsUpDisplay HUD => UIManager.Instance.HeadsUpDisplay;
 
-        [Export]
-        private CharacterInfo _CharacterInfo;
+        [Export] private RichTextLabel DebugInfo;
 
-        [Export]
-        private Control _Sliders;
+        [Export] private CharacterInfo _CharacterInfo;
 
-        [Export]
-        private TabContainer _Options;
+        [Export] private HeadsUpDisplay HeadsUpDisplay;
 
-        [Export]
-        private Control KwPsControl;
+        [Export] private Control _Sliders;
 
-        [Export]
-        private Control CbTsControl;
+        [Export] private TabContainer _Options;
 
-        [Export]
-        private UIProgressBar _SwordBreezeBar;
+        [Export] private Control KwPsControl;
 
-        [Export]
-        private CanvasLayer _ScreenCanvas;
+        [Export] private Control CbTsControl;
+
+        [Export] private CanvasLayer _ScreenCanvas;
 
         internal ObjPool<KeywordPanel> keywordPanels;
         internal ObjPool<CombatTextBox> combatTextBoxes;
 
         protected override void Initialization()
         {
-            this.KwPsControl = UIManager.Instantiate(nameof(this.KwPsControl), ref this.KwPsControl, this._ScreenCanvas);
-            this.CbTsControl = UIManager.Instantiate(nameof(this.CbTsControl), ref this.CbTsControl, this);
-            this.keywordPanels = new ObjPool<KeywordPanel>(((i) => { KeywordPanel obj = new(); this.KwPsControl.AddChild(obj.Disable()); obj.Visible = false; return obj; }), 8, ObjPool<KeywordPanel>.NodeComparer);
-            this.keywordPanels.OnRequest += (k) => LazyUtils.Enable(k);
-            this.keywordPanels.OnRelease += (k) => LazyUtils.Disable(k);
-            this.combatTextBoxes = new ObjPool<CombatTextBox>(((i) => { CombatTextBox obj = new(); this.CbTsControl.AddChild(obj.Disable());obj.Visible = false; return obj; }), 32, ObjPool<CombatTextBox>.NodeComparer);
             this._CharacterInfo.LoadCharacter(GameManager.LocalCharacter);
+            this.HeadsUpDisplay.BindTo(GameManager.LocalCharacter);
         }
 
         protected override void EnterTree()
@@ -87,6 +76,13 @@ namespace LOI.Manager
                 slider.OnValueChanged += (value) => { Options.AmbientVolume = (float)value; };
                 this._Sliders.AddChild(slider);
             }
+            this.KwPsControl = UIManager.Instantiate(nameof(this.KwPsControl), ref this.KwPsControl, this._ScreenCanvas);
+            this.CbTsControl = UIManager.Instantiate(nameof(this.CbTsControl), ref this.CbTsControl, this);
+            this.keywordPanels = new ObjPool<KeywordPanel>(((i) => { KeywordPanel obj = new(); this.KwPsControl.AddChild(obj.Disable()); obj.Visible = false; return obj; }), 8, ObjPool<KeywordPanel>.NodeComparer);
+            this.keywordPanels.OnRequest += (k) => LazyUtils.Enable(k);
+            this.keywordPanels.OnRelease += (k) => LazyUtils.Disable(k);
+            this.combatTextBoxes = new ObjPool<CombatTextBox>(((i) => { CombatTextBox obj = new(); this.CbTsControl.AddChild(obj.Disable()); obj.Visible = false; return obj; }), 32, ObjPool<CombatTextBox>.NodeComparer);
+            this.HeadsUpDisplay = UIManager.Instantiate(nameof(this.HeadsUpDisplay), ref this.HeadsUpDisplay, this._ScreenCanvas);
         }
 
         protected override void GameUpdate()
@@ -150,6 +146,21 @@ namespace LOI.Manager
         /// <param name="parent">亲对象</param>
         /// <returns>实例化的对象</returns>
         public static T Instantiate<T>(string name, ref T control, Node parent) where T : Control, new()
+        {
+            if (control != null) control.Name = name;
+            else if (parent.NotNull() && parent.FindChild(name) is T child) control = child;
+            else control = new T() { Name = name };
+            if (parent != null && control != null && parent != control.GetParent()) parent.AddChild(control);
+            return control;
+        }
+
+        /// <summary> 快速创建新对象并绑定 </summary>
+        /// <typeparam name="T">Control对象类型</typeparam>
+        /// <param name="name">对象内部名</param>
+        /// <param name="control">重写属性</param>
+        /// <param name="parent">亲对象</param>
+        /// <returns>实例化的对象</returns>
+        public static T Instantiate<T>(string name, T control, Node parent) where T : Control, new()
         {
             if (control != null) control.Name = name;
             else if (parent.NotNull() && parent.FindChild(name) is T child) control = child;

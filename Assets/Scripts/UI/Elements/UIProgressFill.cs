@@ -13,12 +13,26 @@ namespace LOI.UI.Elements
 
         public Color Color { get => field; set => this.Material.SetShaderParameter(nameof(this.Color), field = value); } = new Color(int.MaxValue);
         public double Value { get => field; set => this.Material.SetShaderParameter(nameof(this.Value), field = value); } = .5d;
+        public Func<double> HookValue;
+        public Func<Color> HookColor;
 
         public new ShaderMaterial Material { get => base.Material as ShaderMaterial; set => base.Material = value; }
 
         public UIProgressFill()
         {
-            this.Material = new ShaderMaterial() { Shader = GD.Load<Shader>("res://Assets/Shaders/ProgressFill.gdshader") };
+            if(this.Material.IsNull()) this.Material = new ShaderMaterial() { Shader = GD.Load<Shader>("res://Assets/Shaders/ProgressFill.gdshader") };
+        }
+
+        public override void _EnterTree()
+        {
+            if(this.Material.IsNull()) this.Material = new ShaderMaterial() { Shader = GD.Load<Shader>("res://Assets/Shaders/ProgressFill.gdshader") };
+        }
+
+        public override void _Process(double delta)
+        {
+            GD.Print(this.GetParent().Name + ":" + this.Name);
+            if (this.HookValue != null) this.Value = this.HookValue.Invoke();
+            if (this.HookColor != null) this.Color = this.HookColor.Invoke();
         }
     }
 }

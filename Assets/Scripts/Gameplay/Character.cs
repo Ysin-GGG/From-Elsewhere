@@ -54,16 +54,11 @@ namespace LOI.Gameplay
             switch (var)
             {
                 case byte b:
-                    if (this._weaponType[(int)WeaponClass.Blade])
-                        if (id == 1) UIManager.SwordBreezeBar_Color = b == 1 ? new Color("3FFFFFFF") : new Color("FF3F3FFF");
+                    //if (this._weaponType[(int)WeaponClass.Blade])
                     break;
                 case short s:
                     if (this._weaponType[(int)WeaponClass.Blade])
-                    {
-                        if (id == 1) UIManager.SwordBreezeBar_Value = (double)s / this.Blade_SwordBreezeMax;
-                        else if (id == 2) UIManager.SwordBreezeBar_Value = this.Blade_SwordBreeze / (double)s;
                         this.Stats.Attack.SwordBreeze.Multiplier = 1 - this.Blade_SwordBreeze / 1000 * .05d;
-                    }
                     break;
             }
             return var;
@@ -82,7 +77,7 @@ namespace LOI.Gameplay
                 this._WeaponVar_Int2 = 0;
                 this._WeaponVar_Bool1 = false;
                 this._WeaponVar_Bool2 = false;
-                this._weaponType = 1 << (int)weapon.WeaponType >> 1;
+                this._weaponType = 1 << (int)weapon.WeaponType;
                 switch (weapon.WeaponType)
                 {
                     case WeaponClass.Blade:
@@ -138,9 +133,10 @@ namespace LOI.Gameplay
             normalCurve.AddPoint(new Vector2(.66f, 1f));
             normalCurve.AddPoint(new Vector2(1, 0));
             */
+            this.Init(WeaponClass.Blade);
         }
 
-        public void Init()
+        public void Init(WeaponClass type)
         {
             this._WeaponVar_Byte1 = 1;
             this._WeaponVar_Byte2 = 0;
@@ -150,11 +146,15 @@ namespace LOI.Gameplay
             this._WeaponVar_Int2 = 0;
             this._WeaponVar_Bool1 = false;
             this._WeaponVar_Bool2 = false;
-            this._weaponType = 1 << (int)WeaponClass.Blade;
-
-            this.Blade_RiposteStance = true;
-            this.Blade_SwordBreezeMax = 4000;
-            this.Blade_SwordBreeze = 0;
+            this._weaponType = 1 << (int)type;
+            switch (type)
+            {
+                case WeaponClass.Blade:
+                    this.Blade_RiposteStance = true;
+                    this.Blade_SwordBreezeMax = 4000;
+                    this.Blade_SwordBreeze = 0;
+                    break;
+            }
         }
 
         protected override void Update()
