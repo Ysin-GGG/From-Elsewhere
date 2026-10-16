@@ -30,7 +30,6 @@ namespace LOI.UI.Elements
 
         public override void _Process(double delta)
         {
-            GD.Print(this.GetParent().Name + ":" + this.Name);
             if (this.HookValue != null) this.Value = this.HookValue.Invoke();
             if (this.HookColor != null) this.Color = this.HookColor.Invoke();
         }
