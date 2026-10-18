@@ -51,7 +51,7 @@ namespace LOI.Manager
         protected override void Initialization()
         {
             this._CharacterInfo.LoadCharacter(GameManager.LocalCharacter);
-            this.HeadsUpDisplay.BindTo(GameManager.LocalCharacter);
+            this.HeadsUpDisplay.Character = GameManager.LocalCharacter;
         }
 
         protected override void EnterTree()

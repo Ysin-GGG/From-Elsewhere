@@ -549,7 +549,6 @@ namespace LOI.DataStructures
         public class Enemy_JumpStrength(float def) : Statistic<float>(def, .33f, 3f) { }
         public abstract class Enemy_Critical(float def, float min, float max, string name) : Statistic<float>(def, min, max, new UniqueToken(new UniqueToken(nameof(Enemy_Critical), '_').LastToken.Token, '.', new UniqueToken(name)))
         {
-            //public override Func<Statistic2<float>, string> Format { get; set; } = (v) => string.Format("{0:0.0%} (+{1:0);-0);±0})", v.Value, v.Value - v.DefValue);
             public class Chance(float def) : Enemy_Critical(def, 0f, 1f, nameof(Chance));
             public class Damage(float def) : Enemy_Critical(def, -4f, 4f, nameof(Damage));
         }

@@ -16,7 +16,7 @@ namespace LOI.UI.Elements
         public Func<double> HookValue;
         public Func<Color> HookColor;
 
-        public new ShaderMaterial Material { get => base.Material as ShaderMaterial; set => base.Material = value; }
+        public new ShaderMaterial Material { get => base.Material as ShaderMaterial; set => base.Material = value is ShaderMaterial sm ? sm : base.Material; }
 
         public UIProgressFill()
         {

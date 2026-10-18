@@ -46,6 +46,8 @@ namespace LOI.Gameplay
         private double _WeaponVar_Double1 { get; set; }
         private double _WeaponVar_Double2 { get; set; }
         private Bit16 _weaponType = new Bit16(0);
+        public SkillInfo[] SkillInfo => this._SkillInfo.ToArray();
+        private List<SkillInfo> _SkillInfo { get; set; }
 
         public override CharacterStatisticCollection Stats { get; } = new CharacterStatisticCollection();
 
@@ -107,33 +109,22 @@ namespace LOI.Gameplay
             }
         }
 
-        public WeaponClass WeaponClass => (this.Equipment[0] as Weapon)?.WeaponType ?? WeaponClass.None;
+        public WeaponClass WeaponClass => (WeaponClass)LazyMath.Log(this._weaponType, 2f); // (this.Equipment[0] as Weapon)?.WeaponType ?? WeaponClass.None;
 
         private Equipment[] Equipment { get; } = new Equipment[10]; // 0: 武器，1-4：饰品，5-9: 防具
         public List<Cate> Dishes { get; } = new List<Cate>();
 
         public Character(CharacterBody2D obj, int id) : base(obj, id)
         {
-            /*
-            this.Stats.MaxLife.ValueChanged += (oldV, newV) => this.Life = (this.Life / (double)(oldV / newV)).Ceiling();
-            this.Life = this.Stats.MaxLife;
-            this.Stats.AddStat(new Statistic2<int>("MaxStamina", 4000, 1000, 9000));
-            */
-            //this.Stats.AddStat(DataReference<StatisticRef>.GetRef(9) ?? new DataReference<StatisticRef>(9, "Vanilla.MaxStamina"), 4000d, 1000d, 9000d);
-            /*
-            //new DataReference<StatisticRef>(9, "Vanilla.LifeCost");
-            new DataReference<StatisticRef>(9, "Vanilla.LifeRegeneration");
-            new DataReference<StatisticRef>(9, "Vanilla.ManaCost");
-            new DataReference<StatisticRef>(9, "Vanilla.ManaGainRate");
-            new DataReference<StatisticRef>(9, "Vanilla.StaminaCost");
-            new DataReference<StatisticRef>(9, "Vanilla.StaminaGainRate");
-            Curve2D normalCurve  = new Curve2D();
-            normalCurve.AddPoint(new Vector2(0, 0));
-            normalCurve.AddPoint(new Vector2(.33f, 1f));
-            normalCurve.AddPoint(new Vector2(.66f, 1f));
-            normalCurve.AddPoint(new Vector2(1, 0));
-            */
             this.Init(WeaponClass.Blade);
+            this._SkillInfo = new List<SkillInfo>(4)
+            {
+                new SkillInfo(State.GetState<SkillArt.Blade.FinalSlash>(), GD.Load<Texture2D>("res://Assets/Images/Icon/Skill/Blade_0_0.png").Duplicate() as Texture2D),
+                new SkillInfo(State.GetState<SkillArt.Blade.FinalSlash>(), GD.Load<Texture2D>("res://Assets/Images/Icon/Skill/Blade_0_0.png").Duplicate() as Texture2D),
+                null,
+                null
+            };
+            this.Mana = 5000;
         }
 
         public void Init(WeaponClass type)
@@ -163,6 +154,8 @@ namespace LOI.Gameplay
                 if (InputManager.OnPressed(GameKey.Right)) { if (!InputManager.OnPressed(GameKey.Left)) this.Facing = 1; }
                 else if (InputManager.OnPressed(GameKey.Left)) this.Facing = -1;
             if (this.Blade_RiposteStance && this.Blade_SwordBreeze < this.Blade_SwordBreezeMax) this.Blade_SwordBreeze += 5;
+            foreach (SkillInfo info in this._SkillInfo)
+                if (info != null && info.Cooldown2 > 0) info.Cooldown2--;
         }
 
         protected override bool PreHit(DamageData source, Entity target, ref double damage, ref int delta_Lvl, ref double delta_AnD, ref double delta_PnR, ref double crit_chance, ref double crit_damage)
@@ -192,8 +185,15 @@ namespace LOI.Gameplay
                 bool STC = this.StateType == StateType.Crouch;
                 bool STA = this.StateType == StateType.Air;
                 bool STL = this.StateType == StateType.Down;
+                for (int i = 8; i < 12; i++)
+                    if (InputManager.OnPressed((GameKey)i))
+                        if (this.SkillInfo[i - 8] != null && this.SkillInfo[i - 8].TryApply(this, false))
+                            return this.SkillInfo[i - 8];
+
                 if (STS && MTI && dlor) return State.GetState<CommonState.RunningBegin>();
+
                 if (MTI && InputManager.OnPressed(GameKey.WeaponAttack1)) return State.GetState<BladeArt.TestAttack>();
+
                 switch (this.CurrState.ID)
                 {
                     case StateRef.IdleStand:

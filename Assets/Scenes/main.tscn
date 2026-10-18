@@ -28,12 +28,9 @@
 [ext_resource type="Theme" uid="uid://dbp8efhcgdg1x" path="res://Assets/Themes/UI1.tres" id="23_a8up6"]
 [ext_resource type="Script" uid="uid://ccve5wvkuydv1" path="res://Assets/Scripts/UI/ManualPanel.cs" id="24_e0qyk"]
 [ext_resource type="Script" uid="uid://bifwe5mbv1wsu" path="res://Assets/Scripts/UI/Elements/UIProgressFill.cs" id="26_nqgrc"]
+[ext_resource type="Script" uid="uid://7fyydwx2w0s3" path="res://Assets/Scripts/UI/ActiveSkillBar.cs" id="27_2whn1"]
 [ext_resource type="Script" uid="uid://rxon3l2qao2t" path="res://Assets/Scripts/UI/Elements/UIProgressBar.cs" id="27_730o7"]
 [ext_resource type="Shader" uid="uid://65xitw8ht52d" path="res://Assets/Shaders/ProgressFill.gdshader" id="27_shq5y"]
-[ext_resource type="Texture2D" uid="uid://btwikclnbgs3a" path="res://Assets/Images/UI/Panel/Panel_1.png" id="29_2whn1"]
-[ext_resource type="Texture2D" uid="uid://btvxtsycvlar2" path="res://Assets/Images/Icon/Skill/Blade_0_0.png" id="29_cma7p"]
-[ext_resource type="Shader" uid="uid://dnxowkqxjlbht" path="res://Assets/Scenes/SkillIcon.gdshader" id="29_qvima"]
-[ext_resource type="Texture2D" uid="uid://kf2x0aff0udw" path="res://Assets/Images/Icon/Skill/Blade_0_1.png" id="31_hlqjr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4qkp8"]
 shader = ExtResource("2_4qkp8")
@@ -328,25 +325,6 @@ bg_color = Color(1, 0.6, 0.6, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcy2v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxo86"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_usbst"]
-shader = ExtResource("29_qvima")
-shader_parameter/FrameVelocity = Vector2(0, 0)
-shader_parameter/Color = Color(0.24705882, 0.24705882, 0.24705882, 1)
-shader_parameter/Flash = Color(1, 1, 1, 1)
-shader_parameter/CooldownValue = 1.0
-shader_parameter/FlashValue = 0.0
-shader_parameter/Offset = 0.0
-shader_parameter/FrameAdd = 0.0
-shader_parameter/FrameMul = 0.0
-shader_parameter/Clip = true
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvima"]
-texture = ExtResource("29_2whn1")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
 
 [node name="Node" type="Node" unique_id=1581472218]
 
@@ -962,20 +940,21 @@ mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="UIManager" unique_id=611353537]
 
-[node name="HeadsUpDisplay" type="VBoxContainer" parent="UIManager/UI" unique_id=651128262 node_paths=PackedStringArray("LifeBar", "ManaBar", "StaminaBar", "SwordBreezeBar")]
-custom_minimum_size = Vector2(0, 80)
+[node name="HeadsUpDisplay" type="VBoxContainer" parent="UIManager/UI" unique_id=651128262 node_paths=PackedStringArray("LifeBar", "ManaBar", "StaminaBar", "SwordBreezeBar", "ActiveSkillBar")]
 offset_right = 480.0
-offset_bottom = 108.0
+offset_bottom = 176.0
 script = ExtResource("21_uh3ed")
 LifeBar = NodePath("LifeBar")
 ManaBar = NodePath("ManaBar")
 StaminaBar = NodePath("StaminaBar")
 SwordBreezeBar = NodePath("SwordBreezeBar")
+ActiveSkillBar = NodePath("")
 metadata/_custom_type_script = "uid://cn7tpob1r6uq5"
 
 [node name="LifeBar" type="NinePatchRect" parent="UIManager/UI/HeadsUpDisplay" unique_id=1070678292]
 custom_minimum_size = Vector2(480, 24)
 layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("16_ccmul")
 patch_margin_left = 8
 patch_margin_top = 2
@@ -1083,6 +1062,12 @@ patch_margin_right = 20
 patch_margin_bottom = 2
 script = ExtResource("26_nqgrc")
 metadata/_custom_type_script = "uid://bifwe5mbv1wsu"
+
+[node name="ActiveSkillBar" type="GridContainer" parent="UIManager/UI/HeadsUpDisplay" unique_id=91824511]
+layout_mode = 2
+columns = 4
+script = ExtResource("27_2whn1")
+metadata/_custom_type_script = "uid://7fyydwx2w0s3"
 
 [node name="CharacterInfo" type="PanelContainer" parent="UIManager/UI" unique_id=1603761287 node_paths=PackedStringArray("DualColumnLeft", "DualColumnRight")]
 visible = false
@@ -1410,6 +1395,7 @@ size_flags_vertical = 3
 bbcode_enabled = true
 
 [node name="KwPsControl" type="Control" parent="UIManager/UI" unique_id=400499020]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1568,91 +1554,6 @@ vertical_alignment = 2
 visible = false
 offset_right = 800.0
 offset_bottom = 800.0
-
-[node name="SkillBar" type="GridContainer" parent="UIManager/UI" unique_id=698961570]
-offset_left = 723.0
-offset_top = 691.0
-offset_right = 851.0
-offset_bottom = 819.0
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-columns = 4
-
-[node name="SkillIcon0" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=1191072794]
-material = SubResource("ShaderMaterial_usbst")
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("31_hlqjr")
-expand_mode = 1
-
-[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon0" unique_id=1667097028]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
-
-[node name="Label" type="Label" parent="UIManager/UI/SkillBar/SkillIcon0" unique_id=337161624]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 15.0
-offset_right = 62.0
-offset_bottom = 49.0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/shadow_outline_size = 4
-theme_override_font_sizes/font_size = 24
-text = "130"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SkillIcon1" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=2002881306]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("29_cma7p")
-expand_mode = 1
-
-[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon1" unique_id=1079215596]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
-
-[node name="SkillIcon2" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=720258061]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("29_cma7p")
-expand_mode = 1
-
-[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon2" unique_id=467993376]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
-
-[node name="SkillIcon3" type="TextureRect" parent="UIManager/UI/SkillBar" unique_id=1120255907]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("29_cma7p")
-expand_mode = 1
-
-[node name="Box" type="PanelContainer" parent="UIManager/UI/SkillBar/SkillIcon3" unique_id=1556038847]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_qvima")
 
 [node name="InputManager" type="Node" parent="." unique_id=526775808]
 script = ExtResource("1_guoxd")
